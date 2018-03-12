@@ -21,6 +21,7 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo "email: " . $row["email"]. " - _password: " . $row["_password"].  "<br>";
 	echo "You have successfully logged into the database"; 
+	header('Location: pages/home.html'); 
     }
 } else {
     echo "0 results";

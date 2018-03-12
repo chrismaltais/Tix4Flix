@@ -51,6 +51,7 @@ $sql .= "insert into member (member_id, email, card_number, card_expiry) values
 
 if ($conn->multi_query($sql) === TRUE) {
     echo "New records created successfully";
+    header('Location: pages/index.html'); 
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
