@@ -1,8 +1,9 @@
 <?php
+session_start();
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
-$dbname = "theatrecomplexdb";
+$dbname = "complexdb";
 $recemail = $_POST["email"];                      
 $recpass = $_POST["password"];                      
 
@@ -12,8 +13,13 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
- 
-$sql = "SELECT email, _password FROM user_account where email = '$recemail' and _password = '$recpass' ";
+
+// Storing session data
+$user_id_query = "SELECT member_id FROM Member where email = '$recemail'";
+$user_id = $conn->query($user_id_query);
+$_SESSION["user_id"] = $user_id -> fetch_assoc();
+echo $user_id -> fetch_assoc();
+$sql = "SELECT email, _password FROM User_Account where email = '$recemail' and _password = '$recpass' ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

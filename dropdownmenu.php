@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $passworddb = "";
-$dbname = "theatrecomplexdb"; 
+$dbname = "complexdb"; 
 
 
 // Create connection
@@ -13,20 +13,19 @@ if ($conn->connect_error) {
 } 
  
 
-   $result = $conn->query("select title, rating from movie");
+   $result = $conn->query("select title, rating from Movie");
     
     echo "<html>";
     echo "<body>";
     echo "<select name='id'>";
-
+    
     while ($row = $result->fetch_assoc()) {
-
                   unset($id, $name);
                   $title = $row['title'];
                   $rating = $row['rating']; 
                   echo '<option value="'.$rating.'">'.$title . ' ' . $rating.'</option>';
                  
-}
+    }
 
     echo "</select>";
     echo "</body>";
