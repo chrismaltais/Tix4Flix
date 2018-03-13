@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $passworddb = "";
-$dbname = "theatrecomplexdb"; 
+$dbname = "complexdb"; 
 $fname = $_POST["fname"]; 
 $lname = $_POST["lname"]; 
 $email = $_POST["email"]; 

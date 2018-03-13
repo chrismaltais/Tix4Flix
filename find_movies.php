@@ -69,6 +69,8 @@
     }
     
     $result = $conn->query("select name from Theatre_Complex");
+    $result2 = $conn->query("select title from Movie");
+    $result3 = $conn->query("select title from Movie");
     ?>
       
     <main role="main">
@@ -95,8 +97,27 @@
                             ?>
                         </select>
                         </div>
-                    
-                        <div class="input-group mb-3 pl-3">
+
+
+	  <div class="d-flex justify-content-between">
+                <div class="input-group mb-3 pr-3">
+                        <div class="input-group-prepend">
+                        <label class="input-group-text" for="movie">Movie  </label>
+                        </div>
+                        <select class="custom-select" id="movie">
+                            <?php
+                            while ($row = $result2->fetch_assoc()) {
+                                unset($id, $name);
+                                $name = $row['title']; 
+                                echo '<option value="'.$name.'">'.$name.'</option>';
+                 
+                            }
+                     
+                            ?>
+                    </select>        
+                    </div>
+
+        <div class="input-group mb-3 pl-3">
                         <div class="input-group-prepend">
                         <label class="input-group-text" for="date">Date</label>
                         </div>
@@ -107,24 +128,10 @@
                             <option value="3">Three</option>
                         </select>
                         </div>
+          
                     
+    
                 </div>
-            <div class="d-flex justify-content-between">
-                <div class="input-group mb-3 pr-3">
-                        <div class="input-group-prepend">
-                        <label class="input-group-text" for="movie">Movie  </label>
-                        </div>
-                        <select class="custom-select" id="movie">
-                            <?php
-                            while ($row = $result->fetch_assoc()) {
-                                unset($id, $name);
-                                $name = $row['name']; 
-                                echo '<option value="'.$name.'">'.$name.'</option>';
-                 
-                            }
-                            ?>
-                        </select>
-                        </div>
                 <div class="pb-3">
                 <a class="btn btn-primary pb-2" href="#" role="button">Find Showtimes &raquo;</a>
                 </div>
