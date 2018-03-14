@@ -99,7 +99,7 @@
                         </div>
 
 
-	  <div class="d-flex justify-content-between">
+	  
                 <div class="input-group mb-3 pr-3">
                         <div class="input-group-prepend">
                         <label class="input-group-text" for="movie">Movie  </label>
@@ -116,8 +116,9 @@
                             ?>
                     </select>        
                     </div>
-
-        <div class="input-group mb-3 pl-3">
+        
+        
+        <div class="input-group mb-3 pr-3">
                         <div class="input-group-prepend">
                         <label class="input-group-text" for="date">Date</label>
                         </div>
@@ -131,7 +132,7 @@
           
                     
     
-                </div>
+                
                 <div class="pb-3">
                 <a class="btn btn-primary pb-2" href="#" role="button">Find Showtimes &raquo;</a>
                 </div>
