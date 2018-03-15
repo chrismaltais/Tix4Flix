@@ -4,6 +4,7 @@
     $password = "";
     $dbname = "complexdb";
     $movie_title = $_POST["movie_chosen"];
+    $complex = $_POST["complex_chosen"]
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,13 +13,22 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    
+    // Get rating of movie selected in find_movies.php
     $result = $conn->query("select rating from Movie where title='$movie_title'");
     $rating = mysqli_fetch_array($result)['rating'];
+    
+    // Get runtime of movie selected in find_movies.php
     $result2 = $conn->query("select run_time from Movie where title='$movie_title'");
     $runtime = mysqli_fetch_array($result2)['run_time'];
+
+    // Get synopsis of movie selected in find_movies.php
     $result3 = $conn->query("select plot_synopsis from Movie where title='$movie_title'");
-    $synopsis = mysqli_fetch_array($result3)['plot_synopsis']; 
+    $synopsis = mysqli_fetch_array($result3)['plot_synopsis'];
+
+    $result_showings= $conn->query("select start_time from Showing where title='$movie_title' and complex='$complex");
+    $num_showings = mysql_num_rows($result_showings);
+    $showings = mysqli_fetch_array($result_showings);
+
 ?>
 
 <!doctype html>
@@ -106,14 +116,22 @@
           <div class="col-md-8">
           <?php 
                 echo "<h1 class='display-3'>" . $_POST["movie_chosen"] . "</h1>";
-                echo "<h2 class='display-8'>" . $rating . " || " . $runtime . "</h2>";
+                echo "<h2 class='display-8'>Rating: " . $rating . " || Runtime: " . $runtime . " mins</h2>";
+                echo "<p>" . $synopsis . "</p>"
           ?>
-          <p>In 1987, Jordan Belfort (Leonardo DiCaprio) takes an entry-level job at a Wall Street brokerage firm. By the early 1990s, while still in his 20s, Belfort founds his own firm, Stratton Oakmont. Together with his trusted lieutenant (Jonah Hill) and a merry band of brokers, Belfort makes a huge fortune by defrauding wealthy investors out of millions. However, while Belfort and his cronies partake in a hedonistic brew of sex, drugs and thrills, the SEC and the FBI close in on his empire of excess.</p>
           
           <h5>Showtimes</h5>
           <div class="row"> 
+            <?php
+                for ($i = 0; $i < $num_showings; $i++) {
+                    // If statement for time needs to go here!
+                    <div class="col-md-3">
+                        <button class="btn btn-secondary" type="button">Showtime 1 &raquo;</button>
+                    </div>
+                }
+            ?>
             <div class="col-md-3">
-              <p><a class="btn btn-secondary" href="#" role="button">Showtime 1 &raquo;</a></p>
+              <button class="btn btn-secondary" href="#" role="button">Showtime 1 &raquo;</button>
             </div>
             <div class="col-md-3">
               <p><a class="btn btn-secondary" href="#" role="button">Showtime 2 &raquo;</a></p>
