@@ -1,3 +1,26 @@
+<?php 
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "complexdb";
+    $movie_title = $_POST["movie_chosen"];
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+      
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    $result = $conn->query("select rating from Movie where title='$movie_title'");
+    $rating = mysqli_fetch_array($result)['rating'];
+    $result2 = $conn->query("select run_time from Movie where title='$movie_title'");
+    $runtime = mysqli_fetch_array($result2)['run_time'];
+    $result3 = $conn->query("select plot_synopsis from Movie where title='$movie_title'");
+    $synopsis = mysqli_fetch_array($result3)['plot_synopsis'];
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -59,9 +82,10 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Come see the hottest films!</h1>
-          <p>Take a look at available showtimes in theatres near you to get started! All you need to do is pick a theatre, movie, and showtime!</p>
-          <p><a class="btn btn-primary btn-lg" href="../find_movies.php" role="button">Find Showtimes &raquo;</a></p>
+          <?php 
+                echo "<h1 class='display-3'>" . $_POST["complex_chosen"] . "</h1>"
+            
+            ?>
         </div>
       </div>
 
@@ -69,48 +93,39 @@
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-4">
-            <h2>The Wolf of Wall Street</h2>
-            <img src="../photos/WolfOfWallStreet.jpg" class="img-rounded" alt="404 Error" width="330" height="494"> 
-          <div class="row">
-            <div class="col-md-3 mb-3">
+            <img class="img-rounded" src="../photos/WolfOfWallStreet.jpg" alt="404 Error" width="360" height="538"> 
+          <div class="d-flex justify-content-around">
+            <div class="col-md-4 mb-6">
             <p><a class="btn btn-secondary" href="https://www.youtube.com/watch?v=iszwuX1AK6A" role="button">Trailer &raquo;</a></p>
             </div>
-            <div class="col-md-4 mb-3">
-            <p><a class="btn btn-secondary" href="#" role="button">Showtimes &raquo;</a></p>
-            </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-6">
             <p><a class="btn btn-secondary" href="#" role="button">Reviews &raquo;</a></p>
             </div>
           </div>
           </div>
-          <div class="col-md-4">
-            <h2>Man of Steel</h2>
-            <img src="../photos/Superman.jpg" class="img-rounded" alt="404 Error" width="330" height="494"> 
-            <div class="row">
-            <div class="col-md-3 mb-3">
-            <p><a class="btn btn-secondary" href="https://www.youtube.com/watch?v=T6DJcgm3wNY" role="button">Trailer &raquo;</a></p>
+          <div class="col-md-8">
+          <?php 
+                echo "<h1 class='display-3'>" . $_POST["movie_chosen"] . "</h1>";
+                echo "<h2 class='display-8'>" . $rating . " || " . $runtime . "</h2>";
+          ?>
+          <p>In 1987, Jordan Belfort (Leonardo DiCaprio) takes an entry-level job at a Wall Street brokerage firm. By the early 1990s, while still in his 20s, Belfort founds his own firm, Stratton Oakmont. Together with his trusted lieutenant (Jonah Hill) and a merry band of brokers, Belfort makes a huge fortune by defrauding wealthy investors out of millions. However, while Belfort and his cronies partake in a hedonistic brew of sex, drugs and thrills, the SEC and the FBI close in on his empire of excess.</p>
+          
+          <h5>Showtimes</h5>
+          <div class="row"> 
+            <div class="col-md-3">
+              <p><a class="btn btn-secondary" href="#" role="button">Showtime 1 &raquo;</a></p>
             </div>
-            <div class="col-md-4 mb-3">
-            <p><a class="btn btn-secondary" href="#" role="button">Showtimes &raquo;</a></p>
+            <div class="col-md-3">
+              <p><a class="btn btn-secondary" href="#" role="button">Showtime 2 &raquo;</a></p>
             </div>
-            <div class="col-md-4 mb-3">
-            <p><a class="btn btn-secondary" href="#" role="button">Reviews &raquo;</a></p>
+            <div class="col-md-3">
+              <p><a class="btn btn-secondary" href="#" role="button">Showtime 3 &raquo;</a></p>
+            </div>
+            <div class="col-md-3">
+              <p><a class="btn btn-secondary" href="#" role="button">Showtime 4 &raquo;</a></p>
             </div>
           </div>
           </div>
-           <div class="col-md-4">
-            <h2>Harry Potter</h2>
-            <img src="../photos/Goblet_of_Fire.jpg" class="img-rounded" alt="404 Error" width="330" height="494"> 
-            <div class="row">
-            <div class="col-md-3 mb-3">
-            <p><a class="btn btn-secondary" href="https://www.youtube.com/watch?v=3EGojp4Hh6I" role="button">Trailer &raquo;</a></p>
-            </div>
-            <div class="col-md-4 mb-3">
-            <p><a class="btn btn-secondary" href="#" role="button">Showtimes &raquo;</a></p>
-            </div>
-            <div class="col-md-4 mb-3">
-            <p><a class="btn btn-secondary" href="#" role="button">Reviews &raquo;</a></p>
-            </div>
           </div>
           </div>
         </div>
@@ -120,7 +135,9 @@
     </main>
 
     <footer class="container">
+      <div class="d-flex justify-content-center">
       <p>&copy; Tix4flix 2017-2018</p>
+    </div>
     </footer>
 
     <!-- Bootstrap core JavaScript

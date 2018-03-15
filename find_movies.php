@@ -1,3 +1,6 @@
+<?php 
+    session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -80,13 +83,12 @@
             <div class="d-flex justify-content-start"> 
                 <h1 class="display-4">Find a showing</h1>
             </div> 
-            <div class="d-flex justify-content-around">
-                    
+            <form class="d-flex justify-content-around" action="../Tix4Flix/pages/find_showtime.php" method="POST">
                         <div class="input-group mb-3 pr-3">
                         <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Complex</label>
+                        <label class="input-group-text" for="complexselect">Complex</label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select class="custom-select" id="complexselect" name="complex_chosen">
                             <?php
                             while ($row = $result->fetch_assoc()) {
                                 unset($id, $name);
@@ -104,7 +106,7 @@
                         <div class="input-group-prepend">
                         <label class="input-group-text" for="movie">Movie  </label>
                         </div>
-                        <select class="custom-select" id="movie">
+                        <select class="custom-select" id="movie" name="movie_chosen">
                             <?php
                             while ($row = $result2->fetch_assoc()) {
                                 unset($id, $name);
@@ -134,11 +136,10 @@
     
                 
                 <div class="pb-3">
-                <a class="btn btn-primary pb-2" href="#" role="button">Find Showtimes &raquo;</a>
+                <button class="btn btn-primary pb-2" type="submit">Find Showtimes &raquo;</button>
                 </div>
+            </form>
             </div>
-            </div>
-          <p></p>
         </div>
       </div>
 
