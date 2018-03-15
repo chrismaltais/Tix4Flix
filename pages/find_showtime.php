@@ -4,7 +4,7 @@
     $password = "";
     $dbname = "complexdb";
     $movie_title = $_POST["movie_chosen"];
-    $complex = $_POST["complex_chosen"]
+    $complex = $_POST["complex_chosen"];
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -25,9 +25,9 @@
     $result3 = $conn->query("select plot_synopsis from Movie where title='$movie_title'");
     $synopsis = mysqli_fetch_array($result3)['plot_synopsis'];
 
-    $result_showings= $conn->query("select start_time from Showing where title='$movie_title' and complex='$complex");
-    $num_showings = mysql_num_rows($result_showings);
-    $showings = mysqli_fetch_array($result_showings);
+    $result_showings = $conn->query("select start_time from Showing where title='$movie_title' and name='$complex'");
+    $num_showings = mysqli_num_rows($result_showings);
+    // $showings = mysqli_fetch_array($result_showings)['start_time'];
 
 ?>
 
@@ -116,21 +116,21 @@
           <div class="col-md-8">
           <?php 
                 echo "<h1 class='display-3'>" . $_POST["movie_chosen"] . "</h1>";
-                echo "<h2 class='display-8'>Rating: " . $rating . " || Runtime: " . $runtime . " mins</h2>";
+                echo "<h4 class='display-8'>Rating: " . $rating . " | Runtime: " . $runtime . " mins</h2>";
                 echo "<p>" . $synopsis . "</p>"
           ?>
           
           <h5>Showtimes</h5>
           <div class="row"> 
             <?php
-                for ($i = 0; $i < $num_showings; $i++) {
+                while ($showings = mysqli_fetch_array($result_showings))  {
                     // If statement for time needs to go here!
-                    <div class="col-md-3">
-                        <button class="btn btn-secondary" type="button">Showtime 1 &raquo;</button>
-                    </div>
+                    echo "<div class='col-md-3'>";
+                    echo "<button class='btn btn-secondary' type='button'>" . $showings['start_time'] . " &raquo;</button>";
+                    echo "</div>";
                 }
             ?>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
               <button class="btn btn-secondary" href="#" role="button">Showtime 1 &raquo;</button>
             </div>
             <div class="col-md-3">
@@ -141,7 +141,7 @@
             </div>
             <div class="col-md-3">
               <p><a class="btn btn-secondary" href="#" role="button">Showtime 4 &raquo;</a></p>
-            </div>
+            </div> -->
           </div>
           </div>
           </div>
