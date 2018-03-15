@@ -18,7 +18,7 @@
     $result2 = $conn->query("select run_time from Movie where title='$movie_title'");
     $runtime = mysqli_fetch_array($result2)['run_time'];
     $result3 = $conn->query("select plot_synopsis from Movie where title='$movie_title'");
-    $synopsis = mysqli_fetch_array($result3)['plot_synopsis'];
+    $synopsis = mysqli_fetch_array($result3)['plot_synopsis']; 
 ?>
 
 <!doctype html>
