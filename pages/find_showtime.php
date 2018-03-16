@@ -5,6 +5,7 @@
     $dbname = "complexdb";
     $movie_title = $_POST["movie_chosen"];
     $complex = $_POST["complex_chosen"];
+    $movie = "";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -24,10 +25,14 @@
     // Get synopsis of movie selected in find_movies.php
     $result3 = $conn->query("select plot_synopsis from Movie where title='$movie_title'");
     $synopsis = mysqli_fetch_array($result3)['plot_synopsis'];
-
+    
+    // Get showtimes of movies
     $result_showings = $conn->query("select start_time from Showing where title='$movie_title' and name='$complex'");
     $num_showings = mysqli_num_rows($result_showings);
-    // $showings = mysqli_fetch_array($result_showings)['start_time'];
+
+    // Find words in movie
+    $words = explode(" ", $movie_title);
+    $num_words_in_movie = count($words);
 
 ?>
 
@@ -103,7 +108,18 @@
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-4">
-            <img class="img-rounded" src="../photos/WolfOfWallStreet.jpg" alt="404 Error" width="360" height="538"> 
+            <?php 
+                $line1 = "<img class='img-rounded' src='../photos/";
+                for ($i = 0; $i < $num_words_in_movie; $i++){  
+                    if ($i == $num_words_in_movie - 1) {
+                        $movie = $movie . $words[$i];
+                    } else {
+                        $movie = $movie . $words[$i] . "%20";
+                    }
+                }
+                echo $line1 . $movie . ".jpg' alt='404 Error' width='360' height='538'>";
+              ?>
+            <!-- <img class="img-rounded" src="../photos/Goblet%20of%20Fire.jpg" alt="404 Error" width="360" height="538"> -->
           <div class="d-flex justify-content-around">
             <div class="col-md-4 mb-6">
             <p><a class="btn btn-secondary" href="https://www.youtube.com/watch?v=iszwuX1AK6A" role="button">Trailer &raquo;</a></p>
@@ -130,18 +146,6 @@
                     echo "</div>";
                 }
             ?>
-            <!-- <div class="col-md-3">
-              <button class="btn btn-secondary" href="#" role="button">Showtime 1 &raquo;</button>
-            </div>
-            <div class="col-md-3">
-              <p><a class="btn btn-secondary" href="#" role="button">Showtime 2 &raquo;</a></p>
-            </div>
-            <div class="col-md-3">
-              <p><a class="btn btn-secondary" href="#" role="button">Showtime 3 &raquo;</a></p>
-            </div>
-            <div class="col-md-3">
-              <p><a class="btn btn-secondary" href="#" role="button">Showtime 4 &raquo;</a></p>
-            </div> -->
           </div>
           </div>
           </div>
