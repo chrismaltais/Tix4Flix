@@ -30,6 +30,10 @@
     $result_showings = $conn->query("select start_time from Showing where title='$movie_title' and name='$complex'");
     $num_showings = mysqli_num_rows($result_showings);
 
+    // Get movie trailer
+    $result_trailer = $conn->query("select trailer_link from Movie where title ='$movie_title'");
+    $trailer = mysqli_fetch_array($result_trailer)['trailer_link'];
+
     // Find words in movie
     $words = explode(" ", $movie_title);
     $num_words_in_movie = count($words);
@@ -119,10 +123,11 @@
                 }
                 echo $line1 . $movie . ".jpg' alt='404 Error' width='360' height='538'>";
               ?>
-            <!-- <img class="img-rounded" src="../photos/Goblet%20of%20Fire.jpg" alt="404 Error" width="360" height="538"> -->
           <div class="d-flex justify-content-around">
             <div class="col-md-4 mb-6">
-            <p><a class="btn btn-secondary" href="https://www.youtube.com/watch?v=iszwuX1AK6A" role="button">Trailer &raquo;</a></p>
+                <?php
+                    echo "<p><a class='btn btn-secondary' href='" . $trailer . " role='button'>Trailer &raquo;</a></p>"
+                ?>
             </div>
             <div class="col-md-4 mb-6">
             <p><a class="btn btn-secondary" href="#" role="button">Reviews &raquo;</a></p>
