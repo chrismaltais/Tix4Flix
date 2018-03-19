@@ -1,9 +1,11 @@
 <?php 
+    session_start();
     $servername = "127.0.0.1";
     $username = "root";
     $password = "";
     $dbname = "complexdb";
     $movie_title = $_POST["movie_chosen"];
+    $_SESSION['movie_title'] = $movie_title;
     $complex = $_POST["complex_chosen"];
     $movie = "";
 
@@ -61,7 +63,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="../pages/home.html">Tix4flix</a>
+      <a class="navbar-brand" href="../php/home.php">Tix4flix</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -69,7 +71,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Book Tickets</a>
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a>
           </li>
           </ul>
 
@@ -113,6 +115,7 @@
         <div class="row">
           <div class="col-md-4">
             <?php 
+                // Break movie title string to add "%20" character for spaces for movie poster file
                 $line1 = "<img class='img-rounded' src='../photos/";
                 for ($i = 0; $i < $num_words_in_movie; $i++){  
                     if ($i == $num_words_in_movie - 1) {

@@ -13,17 +13,17 @@
     <title>Home - Tix4flix</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min2.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="custom_css/jumbotron.css" rel="stylesheet">
+    <link href="../custom_css/jumbotron.css" rel="stylesheet">
   </head>
 
     
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="../pages/home.html">Tix4flix</a>
+      <a class="navbar-brand" href="../php/home.php">Tix4flix</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,7 +31,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Book Tickets</a> 
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a> 
           </li>
           </ul>
 
@@ -83,7 +83,7 @@
             <div class="d-flex justify-content-start"> 
                 <h1 class="display-4">Find a showing</h1>
             </div> 
-            <form class="d-flex justify-content-around" action="../Tix4Flix/pages/find_showtime.php" method="POST">
+            <form class="d-flex justify-content-around" action="../php/find_showtime.php" method="POST">
                         <div class="input-group mb-3 pr-3">
                         <div class="input-group-prepend">
                         <label class="input-group-text" for="complexselect">Complex</label>
