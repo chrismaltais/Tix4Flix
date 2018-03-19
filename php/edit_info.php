@@ -57,7 +57,7 @@
     <div class="container">
       <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="../photos/logo2.svg" alt="" width="150" height="150">
-        <h2>Edit Uder Information</h2>
+        <h2>Edit User Information</h2>
         <p class="lead">Edit any information, just make sure to press save!</p>
       </div>
         <div class="col-md-10 order-md-1">

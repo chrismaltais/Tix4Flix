@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,7 +22,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="../pages/home.html">Tix4flix</a>
+      <a class="navbar-brand" href="../php/home.php">Tix4flix</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -59,7 +62,9 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Cineplex Odeon 3</h1>
+            <?php
+                echo "<h1 class='display-3'>" . $_SESSION['complex'] . "</h1>";
+            ?>
         </div>
       </div>
 
@@ -67,10 +72,14 @@
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-4">
-            <img class="img-rounded" src="../photos/WolfOfWallStreet.jpg" alt="404 Error" width="360" height="538"> 
+            <?php
+                echo "<img class='img-rounded' src='../photos/" . $_SESSION['movie_photo'] . ".jpg' alt='404 Error' width='360' height='538'>"
+              ?> 
           <div class="d-flex justify-content-around">
             <div class="col-md-4 mb-6">
-            <p><a class="btn btn-secondary" href="https://www.youtube.com/watch?v=iszwuX1AK6A" role="button">Trailer &raquo;</a></p>
+            <?php
+                echo "<button class='btn btn-secondary' href='" . $_SESSION['trailer'] . "'>Trailer &raquo;</button>"
+            ?>
             </div>
             <div class="col-md-4 mb-6">
             <p><a class="btn btn-secondary" href="#" role="button">Reviews &raquo;</a></p>
@@ -78,9 +87,11 @@
           </div>
           </div>
           <div class="col-md-8">
-          <h1 class="display-3">The Wolf of Wall Street</h1>
-          <h2 class="display-8"> Showing time || Rating || Runtime</h2>
-          <p>In 1987, Jordan Belfort (Leonardo DiCaprio) takes an entry-level job at a Wall Street brokerage firm. By the early 1990s, while still in his 20s, Belfort founds his own firm, Stratton Oakmont. Together with his trusted lieutenant (Jonah Hill) and a merry band of brokers, Belfort makes a huge fortune by defrauding wealthy investors out of millions. However, while Belfort and his cronies partake in a hedonistic brew of sex, drugs and thrills, the SEC and the FBI close in on his empire of excess.</p>
+              <?php
+                  echo "<h1 class='display-3'>" . $_SESSION['movie_title'] . "</h1>";
+                  echo "<h2 class='display-8'>" . $_SESSION['showing'] . " | " . $_SESSION['rating'] . " | " . $_SESSION['runtime'] . " mins</h2>";
+                  echo "<p>" . $_SESSION['synopsis'] . "</p>";
+              ?>
 
           <h5>Tickets: </h5>
           <div class="row"> 

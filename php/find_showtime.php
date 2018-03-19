@@ -5,7 +5,7 @@
     $password = "";
     $dbname = "complexdb";
     $movie_title = $_POST["movie_chosen"];
-    $_SESSION['movie_title'] = $movie_title;
+    
     $complex = $_POST["complex_chosen"];
     $movie = "";
 
@@ -39,6 +39,14 @@
     // Find words in movie
     $words = explode(" ", $movie_title);
     $num_words_in_movie = count($words);
+
+    // Identify global variables
+    $_SESSION['movie_title'] = $movie_title;
+    $_SESSION['complex'] = $complex;
+    $_SESSION['rating'] = $rating;
+    $_SESSION['runtime'] = $runtime;
+    $_SESSION['trailer'] = $trailer;
+    $_SESSION['synopsis'] = $synopsis;
 
 ?>
 
@@ -124,6 +132,7 @@
                         $movie = $movie . $words[$i] . "%20";
                     }
                 }
+                $_SESSION['movie_photo'] = $movie;
                 echo $line1 . $movie . ".jpg' alt='404 Error' width='360' height='538'>";
               ?>
           <div class="d-flex justify-content-around">
@@ -145,16 +154,17 @@
           ?>
           
           <h5>Showtimes</h5>
-          <div class="row"> 
+          <form class="row" action="../php/purchase_page.php" method="POST"> 
             <?php
                 while ($showings = mysqli_fetch_array($result_showings))  {
                     // If statement for time needs to go here!
-                    echo "<div class='col-md-3'>";
-                    echo "<button class='btn btn-secondary' type='button'>" . $showings['start_time'] . " &raquo;</button>";
+                    echo "<div class='col-md-3' name='showtime'>";
+                    echo "<button class='btn btn-secondary' type='submit'>" . $showings['start_time'] . " &raquo;</button>";
+                    $_SESSION['showing'] = $showings['start_time'];
                     echo "</div>";
                 }
             ?>
-          </div>
+          </form>
           </div>
           </div>
           </div>

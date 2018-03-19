@@ -26,8 +26,9 @@ if ($conn->connect_error) {
  
 $sql = "select max(member_id) from member";
 $result = $conn->query($sql);
+
 if ($result->num_rows > 0) {
-$nextmemberid = mysqli_fetch_array($result)['max(member_id)'] + 1;
+    $nextmemberid = mysqli_fetch_array($result)['max(member_id)'] + 1;
 }
 
 else {
@@ -35,13 +36,9 @@ else {
 }
 
 
-
- 
 $sql = "insert into User_Account (email, _password, fname, lname, street_name, street_num,
 postal_code, phone_number) values
 ('$email','$password','$fname', '$lname','$streetname',$streetnumber,'$postalcode', '$phonenumber');";
-
-
 
 
 $sql .= "insert into member (member_id, email, card_number, card_expiry) values
