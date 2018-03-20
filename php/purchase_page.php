@@ -89,15 +89,15 @@
           <div class="col-md-8">
               <?php
                   echo "<h1 class='display-3'>" . $_SESSION['movie_title'] . "</h1>";
-                  echo "<h2 class='display-8'>" . $_SESSION['showing'] . " | " . $_SESSION['rating'] . " | " . $_SESSION['runtime'] . " mins</h2>";
+                  echo "<h2 class='display-8'>Show Time: " . $_SESSION['showing'] . " | Rating:" . $_SESSION['rating'] . " | Runtime:" . $_SESSION['runtime'] . " mins</h2>";
                   echo "<p>" . $_SESSION['synopsis'] . "</p>";
               ?>
 
           <h5>Tickets: </h5>
           <div class="row"> 
-            <div class="col-md-3 mb-3">
-              <input Name=tickets_number type="text" class="form-control" id="tickets_number" placeholder="Number of tickets" required>
-            </div>
+            <form class="col-md-3 mb-3">
+              <input Name=tickets_number type="text" class="form-control" id="tickets_number" placeholder="Number of tickets" onkeydown="getPrice(this.value)" required>
+            </form>
 
             <div class="col-md-2 mb-3 pt-2">
               <div class="row">
@@ -105,7 +105,7 @@
                 <p>Price:</p>
               </div>
               <div class="col-md-4">
-                <p>$12.00</p>
+                <p><span id="price"></span></p>
               </div>
             </div>
             </div>
@@ -136,5 +136,14 @@
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="../../../../assets/js/vendor/popper.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script>   
+        // Update Price dynamically
+        $(document).ready(function() {
+            $("#tickets_number").change(function() {
+                $('#price').html("$" +
+                $(this).val() * 12 + ".00");
+            }).change();
+        });
+    </script>
   </body>
 </html>
