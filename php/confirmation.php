@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+    $_SESSION['num_tickets'] = $_POST["num_tickets"];
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,7 +24,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="../pages/home.html">Tix4flix</a>
+      <a class="navbar-brand" href="../php/home.php">Tix4flix</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,7 +32,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Book Tickets</a>
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a>
           </li>
           </ul>
 
@@ -67,18 +72,27 @@
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-4">
-            <img class="img-rounded" src="../photos/WolfOfWallStreet.jpg" alt="404 Error" width="360" height="538"> 
+            <?php
+                echo "<img class='img-rounded' src='../photos/" . $_SESSION['movie_photo'] . ".jpg' alt='404 Error' width='360' height='538'>";
+              ?>
           </div>
           <div class="col-md-8">
           <h1 class="display-3">Booking Details</h1>
-          <h2 class="display-8"> The Wolf of Wall Street</h2>
-          <h3 class="display-8"> Showing time || 3 tickets || Runtime</h3>
+          <?php
+              echo "<h2 class='display-8'>" . $_SESSION['movie_title'] . "</h2>";
+              echo "<h5 class='display-8'>" . $_SESSION['showing'] . " | Tickets: " . $_SESSION['num_tickets'] . " | Runtime:" .  $_SESSION['runtime'] . " mins</h5>";
+          ?>
+          
           <p>We look forward to seeing you in one of our movie theatres shortly! In the meantime, you can continue to look for other movies that might interest you on our website. Make sure you arrive to the theatre 10-15 minutes before the movie with your movie snacks in hand. Enjoy! </p>
+        
+          <!-- Insert Review into DB -->
 
-          <p><a class="btn btn-secondary" href="../pages/home.html" role="button">Return Home &raquo;</a></p>
+          <p><a class="btn btn-secondary" href="../php/home.php" role="button">Return Home &raquo;</a></p>
 
-          <div class="col-md-4">
-            <img class="img-rounded" src="../photos/checkmark.gif" alt="404 Error" width="200" height="200"> 
+          <div class="col-md-8">
+              <div class="row justify-content-end">
+                <img class="img-rounded" src="../photos/checkmark.gif" alt="404 Error" width="200" height="200">
+              </div>
           </div>
 
 

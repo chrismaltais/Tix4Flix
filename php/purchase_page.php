@@ -30,7 +30,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="../custom_css/find_movies.php">Book Tickets</a>
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a>
           </li>
           </ul>
 
@@ -89,35 +89,34 @@
           <div class="col-md-8">
               <?php
                   echo "<h1 class='display-3'>" . $_SESSION['movie_title'] . "</h1>";
-                  echo "<h2 class='display-8'>Show Time: " . $_SESSION['showing'] . " | Rating:" . $_SESSION['rating'] . " | Runtime:" . $_SESSION['runtime'] . " mins</h2>";
+                  echo "<h4 class='display-8'>Show Time: " . $_SESSION['showing'] . " | Rating: " . $_SESSION['rating'] . " | Runtime: " . $_SESSION['runtime'] . " mins</h4>";
                   echo "<p>" . $_SESSION['synopsis'] . "</p>";
               ?>
 
           <h5>Tickets: </h5>
-          <div class="row"> 
-            <form class="col-md-3 mb-3">
-              <input Name=tickets_number type="text" class="form-control" id="tickets_number" placeholder="Number of tickets" onkeydown="getPrice(this.value)" required>
-            </form>
+          <form class="row" action="../php/confirmation.php" method="POST"> 
+            <div class="col-md-3 mb-3">
+              <input name=num_tickets type="text" class="form-control" id="tickets_number" placeholder="Number of tickets" onkeydown="getPrice(this.value)" required>
+            </div>
 
             <div class="col-md-2 mb-3 pt-2">
-              <div class="row">
+              <div class="row"> 
               <div class="col-md-5">
                 <p>Price:</p>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4" action="../php/confirmation.php" method="POST">
                 <p><span id="price"></span></p>
               </div>
             </div>
             </div>
 
             <div class="col-md-3 mb-3">
-              <p><a class="btn btn-secondary" href="../pages/confirmation.html" role="button">Purchase &raquo;</a></p>
+              <button class="btn btn-secondary" type="submit">Purchase &raquo;</button>
             </div>
+            </form>
           </div>
           </div>
           </div>
-          </div>
-        </div>
 
       </div> <!-- /container -->
 
