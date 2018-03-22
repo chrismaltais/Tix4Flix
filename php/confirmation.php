@@ -1,6 +1,18 @@
 <?php 
     session_start();
     $_SESSION['num_tickets'] = $_POST["num_tickets"];
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "complexdb";
+    
+    // Connect DB
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
 ?>
 
 <!doctype html>
@@ -85,7 +97,35 @@
           
           <p>We look forward to seeing you in one of our movie theatres shortly! In the meantime, you can continue to look for other movies that might interest you on our website. Make sure you arrive to the theatre 10-15 minutes before the movie with your movie snacks in hand. Enjoy! </p>
         
-          <!-- Insert Review into DB -->
+          <?php
+            // Get last reservation ID to have been created
+            $get_resID_query = $conn->query("select max(reservation_id) from Reservations");
+            
+            // Prep variable so SQL statement (couldn't get $_SESSION vars to work in statement for some reason)
+            $showing = $_SESSION['showing'];
+            $complex = $_SESSION['complex'];
+            $title = $_SESSION['movie_title'];
+            $num_tickets = $_SESSION['num_tickets'];
+            $user_id = $_SESSION['user_id'];
+            
+            // SQL for grabbing showing ID for purchased reservation
+            $sql = "select showing_id from Showing where start_time = '$showing' and name = '$complex' and title = '$title'";
+              
+            $get_showingID_query = $conn->query($sql);
+            
+            $showing_id = mysqli_fetch_array($get_showingID_query)['showing_id'];
+             
+            // Assign new res ID
+            if ($get_resID_query->num_rows > 0) {
+                $next_reservation_id = mysqli_fetch_array($get_resID_query)['max(reservation_id)'] + 1;
+            } else {
+                $next_reservation_id = 1;
+            }
+              
+            $conn->query("insert into Reservations (reservation_id, num_tickets, account_num, showing_id) values
+                        ('$next_reservation_id', $num_tickets, $user_id, '$showing_id')");
+              
+          ?>
 
           <p><a class="btn btn-secondary" href="../php/home.php" role="button">Return Home &raquo;</a></p>
 
