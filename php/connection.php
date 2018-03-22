@@ -5,7 +5,8 @@ $username = "root";
 $password = "";
 $dbname = "complexdb";
 $recemail = $_POST["email"];                      
-$recpass = $_POST["password"];                      
+$recpass = $_POST["password"];
+$_SESSION["email"] = $recemail;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
