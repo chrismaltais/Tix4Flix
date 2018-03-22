@@ -31,7 +31,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a> 
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a>
           </li>
           </ul>
 
@@ -43,9 +43,9 @@
 
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Settings</a>
+            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Settings</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="../pages/edit_info.html">Edit Personal Info</a>
+              <a class="dropdown-item" href="../php/edit_info.php">Edit Personal Info</a>
               <a class="dropdown-item" href="#">My Reservations</a>
               <a class="dropdown-item" href="#">Reservation History</a>
               <a class="dropdown-item" href="../pages/index.html">Logout</a>

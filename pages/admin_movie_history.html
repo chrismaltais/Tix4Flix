@@ -105,6 +105,7 @@
             </ul> 
           </div>
         </nav>
+          
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -113,6 +114,23 @@
 
           <h4 class="h4"> Account Details </h4>
           <div class="row">
+              <?php 
+   $username = "root";
+    $password = "";
+    $dbname = "complexdb";
+
+
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+      
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $result = $conn->query("select member.member_id, user_account.fname, user_account.lname from user_account right join member on member.email = user_account.email");
+
+          while($row = $result->fetch_assoc()) {
+
             <div class="col-md-1.5 mb-3">
               <p>Account Number:</p>
             </div>
@@ -136,6 +154,8 @@
 
           <p></p>
         </div>
+}
+?>
 
 
           <h4 class="h4"> Current Reservations </h4>

@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin Dashboard</title>
+    <title>Admin - Movie History</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
@@ -108,24 +108,12 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Admin Dashboard</h1>
-          
+            <h1 class="h2">Member Movie History</h1>
           </div>
 
-          <div class="table-responsive">
-            <table class="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th>Account Number</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Remove Member</th>
-                  <th>Member Movie History</th>
-                </tr>
-              </thead>
-              <tbody>
-                  
- <?php 
+          <h4 class="h4"> Account Details </h4>
+          <div class="row">
+               <?php 
     $servername = "127.0.0.1";
     $username = "root";
     $password = "";
@@ -133,30 +121,122 @@
 
 
 
-    // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
       
-    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    // Get rating of movie selected in find_movies.php
-    $result = $conn->query("select member.member_id, user_account.fname, user_account.lname from user_account right join member on member.email = user_account.email");
+    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $actual_link_adj = str_replace("http://localhost/github/php/admin_movie_history.php?", "", $actual_link);
+    $result = $conn->query("select member.member_id, user_account.fname, user_account.lname from user_account right join member on member.email = user_account.email where member.member_id = ' $actual_link_adj '");
 
           while($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo  "<td>". $row["member_id"] ."</td>";
-                echo  "<td>". $row["fname"] ."</td>";
-                echo  "<td>". $row["lname"] ."</td>";
-                echo  "<td><a class='btn btn-link ' href='#' role='button'>Remove &raquo;</a></td>";
-                echo  "<td><a class='btn btn-link ' href='../php/admin_movie_history.php?" . $row["member_id"] . "' role='button'>Movie History &raquo</a>";
-                echo "</td>";
-                echo "</tr>";
-          }
-        ?>
-  </tbody>
+
+            echo  "<div class='col-md-1.5 mb-3'>";
+            echo  "<p>Account Number:</p>";
+            echo  "</div>";
+            echo  "<div class='col-md-1 mb-3'>";
+            echo  "<p class='text-left'>". $row["member_id"] ."</p>";
+            echo  "</div>";
+
+            echo "<div class='col-md-1.5'>";
+            echo  "<p>First Name:</p>";
+            echo "</div>";
+            echo "<div class='col-md-1'>";
+            echo  "<p>". $row["fname"] ."</p>";
+            echo "</div>";
+
+            echo "<div class='col-md-1.5'>";
+            echo  "<p>Last Name:</p>";
+            echo "</div>";
+            echo "<div class='col-md-1'>";
+            echo  "<p>". $row["lname"] ."</p>";
+            echo "</div>";
+
+          echo "<p></p>";
+              break;
+       
+}
+?>
+           
+        </div>
+
+
+          <h4 class="h4"> Current Reservations </h4>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                  
+                <tr>
+                  <th>Reservation Number</th>
+                  <th>Complex</th>
+                  <th>Movie</th>
+                  <th>Start Time</th>
+                  <th>Number of Tickets</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+
+                <tr>
+                  <td>1,001</td>
+                  <td>Cineplex Odeon</td>
+                  <td>Wolf of Wall St</td>
+                  <td>4:30</td>
+                  <td>3</td>
+                </tr>
+
+                <tr>
+                  <td>1,001</td>
+                  <td>Cineplex Odeon</td>
+                  <td>Wolf of Wall St</td>
+                  <td>10:20</td>
+                  <td>2</td>
+                </tr>
+
+
+              </tbody>
             </table>
           </div>
+
+
+
+          <h4 class="h4"> Previous Reservations </h4>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Reservation Number</th>
+                  <th>Complex</th>
+                  <th>Movie</th>
+                  <th>Start Time</th>
+                  <th>Number of Tickets</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr>
+                  <td>1,001</td>
+                  <td>Cineplex Odeon</td>
+                  <td>Wolf of Wall St</td>
+                  <td>4:30</td>
+                  <td>3</td>
+                </tr>
+
+                <tr>
+                  <td>1,001</td>
+                  <td>Cineplex Odeon</td>
+                  <td>Wolf of Wall St</td>
+                  <td>10:20</td>
+                  <td>2</td>
+                </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+
+
         </main>
 
        <footer class="container">
@@ -215,6 +295,3 @@
     </script>
   </body>
 </html>
-
- 
-

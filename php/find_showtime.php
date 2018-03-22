@@ -94,7 +94,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Settings</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="../pages/edit_info.html">Edit Personal Info</a>
+              <a class="dropdown-item" href="../php/edit_info.php">Edit Personal Info</a>
               <a class="dropdown-item" href="#">My Reservations</a>
               <a class="dropdown-item" href="#">Reservation History</a>
               <a class="dropdown-item" href="../pages/index.html">Logout</a>
