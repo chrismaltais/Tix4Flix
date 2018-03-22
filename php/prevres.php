@@ -88,7 +88,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Get rating of movie selected in find_movies.php
-    $result = $conn->query("select reservations.num_tickets, movie.run_time, showing.title, showing.start_time, showing.name from reservations left join showing on showing.showing_id = reservations.showing_id left join movie on movie.title = showing.title where reservations.account_num = $user");
+    $result = $conn->query("select Reservations.num_tickets, Movie.run_time, Showing.title, Showing.start_time, Showing.name from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num = $user");
           while($row = $result->fetch_assoc()) {
             echo "<div class='row'>";
           echo "<div class='col-md-4'>";    

@@ -1,6 +1,5 @@
 <?php 
     session_start();
-    $_SESSION['num_tickets'] = $_POST["num_tickets"];
     $servername = "127.0.0.1";
     $username = "root";
     $password = "";
@@ -92,7 +91,7 @@
           <h1 class="display-3">Booking Details</h1>
           <?php
               echo "<h2 class='display-8'>" . $_SESSION['movie_title'] . "</h2>";
-              echo "<h5 class='display-8'>" . $_SESSION['showing'] . " | Tickets: " . $_SESSION['num_tickets'] . " | Runtime:" .  $_SESSION['runtime'] . " mins</h5>";
+              echo "<h5 class='display-8'>" . $_SESSION['showing'] . " | Tickets: " . $_SESSION['num_tickets'] . " | Runtime: " .  $_SESSION['runtime'] . " mins</h5>";
           ?>
           
           <p>We look forward to seeing you in one of our movie theatres shortly! In the meantime, you can continue to look for other movies that might interest you on our website. Make sure you arrive to the theatre 10-15 minutes before the movie with your movie snacks in hand. Enjoy! </p>
@@ -107,6 +106,7 @@
             $title = $_SESSION['movie_title'];
             $num_tickets = $_SESSION['num_tickets'];
             $user_id = $_SESSION['user_id'];
+            $date = $_SESSION['date']; 
             
             // SQL for grabbing showing ID for purchased reservation
             $sql = "select showing_id from Showing where start_time = '$showing' and name = '$complex' and title = '$title'";

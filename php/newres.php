@@ -87,6 +87,7 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+          
     // Get rating of movie selected in find_movies.php
     $result = $conn->query("select reservations.reservation_id, reservations.num_tickets, movie.run_time, showing.title, showing.start_time, showing.name from reservations left join showing on showing.showing_id = reservations.showing_id left join movie on movie.title = showing.title where reservations.account_num = $user");
 

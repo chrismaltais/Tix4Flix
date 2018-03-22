@@ -5,7 +5,7 @@
     $password = "";
     $dbname = "complexdb";
     $movie_title = $_POST["movie_chosen"];
-    
+    $date = $_POST["date_chosen"];
     $complex = $_POST["complex_chosen"];
     $movie = "";
 
@@ -29,7 +29,7 @@
     $synopsis = mysqli_fetch_array($result3)['plot_synopsis'];
     
     // Get showtimes of movies
-    $result_showings = $conn->query("select start_time from Showing where title='$movie_title' and name='$complex'");
+    $result_showings = $conn->query("select start_time from Showing where title='$movie_title' and name='$complex' and date_played='$date'");
     $num_showings = mysqli_num_rows($result_showings);
 
     // Get movie trailer
@@ -47,6 +47,7 @@
     $_SESSION['runtime'] = $runtime;
     $_SESSION['trailer'] = $trailer;
     $_SESSION['synopsis'] = $synopsis;
+    $_SESSION['date'] = $date;
 
 ?>
 
@@ -154,17 +155,16 @@
           ?>
           
           <h5>Showtimes</h5>
-          <form class="row" action="../php/purchase_page.php" method="POST"> 
+          <div class="row"> 
             <?php
                 while ($showings = mysqli_fetch_array($result_showings))  {
                     // If statement for time needs to go here!
                     echo "<div class='col-md-3' name='showtime'>";
-                    echo "<button class='btn btn-secondary' type='submit'>" . $showings['start_time'] . " &raquo;</button>";
-                    $_SESSION['showing'] = $showings['start_time'];
+                    echo "<p><a class='btn btn-secondary' href='../php/purchase_page.php?" . $showings['start_time'] . "' role='button'>" . $showings['start_time'] . " &raquo;</a></p>";
                     echo "</div>";
                 }
             ?>
-          </form>
+          </div>
           </div>
           </div>
           </div>

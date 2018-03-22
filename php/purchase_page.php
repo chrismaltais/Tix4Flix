@@ -1,6 +1,11 @@
 <?php
     session_start();
+    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $link_split = explode("?", $actual_link);
+    $showing = $link_split[1];
+    $_SESSION['showing'] = $showing;
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -89,12 +94,12 @@
           <div class="col-md-8">
               <?php
                   echo "<h1 class='display-3'>" . $_SESSION['movie_title'] . "</h1>";
-                  echo "<h4 class='display-8'>Show Time: " . $_SESSION['showing'] . " | Rating: " . $_SESSION['rating'] . " | Runtime: " . $_SESSION['runtime'] . " mins</h4>";
+                  echo "<h4 class='display-8'>Show Time: " . $showing . " | Rating: " . $_SESSION['rating'] . " | Runtime: " . $_SESSION['runtime'] . " mins</h4>";
                   echo "<p>" . $_SESSION['synopsis'] . "</p>";
               ?>
 
           <h5>Tickets: </h5>
-          <form class="row" action="../php/confirmation.php" method="POST"> 
+          <form class="row" action="../php/seats_avail_logic.php" method="POST"> 
             <div class="col-md-3 mb-3">
               <input name=num_tickets type="text" class="form-control" id="tickets_number" placeholder="Number of tickets" onkeydown="getPrice(this.value)" required>
             </div>
@@ -104,7 +109,7 @@
               <div class="col-md-5">
                 <p>Price:</p>
               </div>
-              <div class="col-md-4" action="../php/confirmation.php" method="POST">
+              <div class="col-md-4">
                 <p><span id="price"></span></p>
               </div>
             </div>
@@ -114,6 +119,19 @@
               <button class="btn btn-secondary" type="submit">Purchase &raquo;</button>
             </div>
             </form>
+            
+            <?php
+                $url = $link_split[0] . "?" . $link_split[1] . "?";
+                $check = str_replace($url, "", $actual_link);
+                if ($check == "error") {
+                    echo "<div class='row'>";
+                    echo "<div class='col'>";
+                    echo "<h4>There are only " . $_SESSION['seats_left'] . " seats left for this showing!</h4>";
+                    echo "<h4>Please select a different amount of tickets.</h4>";
+                    echo "</div></div>";
+               }   
+            ?>
+
           </div>
           </div>
           </div>

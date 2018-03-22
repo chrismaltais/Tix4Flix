@@ -114,7 +114,6 @@
                                 echo '<option value="'.$name.'">'.$name.'</option>';
                  
                             }
-                     
                             ?>
                     </select>        
                     </div>
@@ -124,11 +123,16 @@
                         <div class="input-group-prepend">
                         <label class="input-group-text" for="date">Date</label>
                         </div>
-                        <select class="custom-select" id="date">
-                            <option selected>Select a date</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="custom-select" id="date" name="date_chosen">
+                            <?php
+                                $startdate=strtotime("Today");
+                                $enddate=strtotime("+1 weeks", $startdate);
+
+                                while ($startdate < $enddate) {
+                                    echo '<option value="'.date("Y-m-d", $startdate).'">' . date("Y-m-d", $startdate) . '</option>';;
+                                    $startdate = strtotime("+1 day", $startdate);
+                                }
+                            ?>
                         </select>
                         </div>
           
