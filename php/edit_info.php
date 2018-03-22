@@ -1,3 +1,55 @@
+<?php
+    session_start();
+    $servername = "localhost";
+    $username = "root";
+    $passworddb = "";
+    $dbname = "complexdb";
+    $email = $_SESSION["email"];
+    $user_id = $_SESSION["user_id"];
+    
+    
+    // Create connection
+    $conn = new mysqli($servername, $username, $passworddb, $dbname);
+      
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    
+    $result = $conn->query("select fname from User_Account where email='$email'");
+    $fname = mysqli_fetch_array($result)['fname'];
+
+    $result = $conn->query("select lname from User_Account where email='$email'");
+    $lname = mysqli_fetch_array($result)['lname'];
+        
+    $result = $conn->query("select _password from User_Account where email='$email'");
+    $_password = mysqli_fetch_array($result)['_password'];
+
+    $result = $conn->query("select street_num from User_Account where email='$email'");
+    $street_num = mysqli_fetch_array($result)['street_num'];
+
+    $result = $conn->query("select street_name from User_Account where email='$email'");
+    $street_name = mysqli_fetch_array($result)['street_name'];
+
+    $result = $conn->query("select phone_number from User_Account where email='$email'");
+    $phone_number = mysqli_fetch_array($result)['phone_number'];
+
+    $result = $conn->query("select postal_code from User_Account where email='$email'");
+    $postal_code = mysqli_fetch_array($result)['postal_code'];
+
+    $result = $conn->query("select card_number from Member where member_id='$user_id'");
+    $cc_num = mysqli_fetch_array($result)['card_number'];
+
+    $result = $conn->query("select card_expiry from Member where member_id='$user_id'");
+    $cc_exp = mysqli_fetch_array($result)['card_expiry'];
+
+    $conn->close();
+    ?>
+
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -28,7 +80,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Book Tickets</a>
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a>
           </li>
           </ul>
 
@@ -62,18 +114,18 @@
       </div>
         <div class="col-md-10 order-md-1">
           <h4 class="mb-3">Edit Info</h4>
-          <form class="needs-validation" novalidate method="POST" action="">
+          <form class="needs-validation" novalidate method="POST" action="../php/updateInfo.php">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
-                <input Name = fname type="text" class="form-control" id="firstName" placeholder="Wendy" value="" required>
+                <input Name = fname type="text" class="form-control" id="firstName" placeholder="Wendy" value="<?php echo $fname;?>" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Last name</label>
-                <input Name = lname type="text" class="form-control" id="lastName" placeholder="Powley" value="" required>
+                <input Name = lname type="text" class="form-control" id="lastName" placeholder="Powley" value="<?php echo $lname;?>" required>
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
@@ -83,15 +135,8 @@
           <div class="col-md-10 order-md-1">
            <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="email">Email </label>
-              <input Name = email type="email" class="form-control" id="email" placeholder="you@example.com">
-              <div class="invalid-feedback">
-                Please enter a valid email address.
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
               <label for="street_number">Phone Number</label>
-              <input Name=phone_number type="text" class="form-control" id="phone_number" placeholder="6135555555" required>
+              <input Name=phone_number type="text" class="form-control" id="phone_number" placeholder="6135555555" value="<?php echo $phone_number;?>"required>
               <div class="invalid-feedback">
                 Please enter a valid phone number.
               </div>
@@ -103,12 +148,12 @@
           <div class="row">
           <div class="col-md-6 mb-3">
               <label for="street_number">Password</label>
-              <input Name=password type="text" class="form-control" id="_password" placeholder="" required>
+              <input Name=password type="text" class="form-control" id="_password" placeholder="" value="<?php echo $_password;?>"required>
             </div>
 
             <div class="col-md-6 mb-3">
               <label for="street_name">Confirm Password</label>
-              <input Name=password2 type="text" class="form-control" id="_password2" placeholder="" required>
+              <input Name=password2 type="text" class="form-control" id="_password2" placeholder="" value="<?php echo $_password;?>" required>
               <div class="invalid-feedback">
                 
               </div>
@@ -122,17 +167,17 @@
 
             <div class="col-md-4 mb-3">
               <label for="street_number">Street Number</label>
-              <input Name=street_number type="text" class="form-control" id="street_number" placeholder="340" required>
+              <input Name=street_number type="text" class="form-control" id="street_number" placeholder="340" value="<?php echo $street_num;?>" required>
             </div>
 
             <div class="col-md-5 mb-3">
               <label for="street_name">Street Name</label>
-              <input Name=street_name type="text" class="form-control" id="street_name" placeholder="Brock St" required>
+              <input Name=street_name type="text" class="form-control" id="street_name" placeholder="Brock St" value="<?php echo $street_name;?>" required>
             </div>
 
             <div class="col-md-3 mb-3">
               <label for="postal_code">Postal Code</label>
-              <input Name=postal_code type="text" class="form-control" id="postal_code" placeholder="K7L1S8" required>
+              <input Name=postal_code type="text" class="form-control" id="postal_code" placeholder="K7L1S8" value="<?php echo $postal_code;?>" required>
             </div>
             </div>
           </div>
@@ -147,14 +192,14 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="cc-number">Credit card number</label>
-                <input Name=cc_number type="text" class="form-control" id="cc-number" placeholder="" required>
+                <input Name=cc_number type="text" class="form-control" id="cc-number" placeholder="" value="<?php echo $cc_num;?>"required>
                 <div class="invalid-feedback">
                   Credit card number is required
                 </div>
               </div>
               <div class="col-md-2 mb-3">
                 <label for="cc-expiration">Expiration</label>
-                <input Name=cc_exp type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                <input Name=cc_exp type="text" class="form-control" id="cc-expiration" placeholder="" value="<?php echo $cc_exp;?>"required>
                 <div class="invalid-feedback">
                   (MM/YY)
                 </div>

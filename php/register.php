@@ -2,7 +2,8 @@
 $servername = "localhost";
 $username = "root";
 $passworddb = "";
-$dbname = "complexdb"; 
+$dbname = "complexdb";
+
 $fname = $_POST["fname"]; 
 $lname = $_POST["lname"]; 
 $email = $_POST["email"]; 
@@ -14,7 +15,8 @@ $streetname = $_POST["street_name"];
 $postalcode = $_POST["postal_code"]; 
 $nameoncard = $_POST["cc_name"]; 
 $creditcardnumber = $_POST["cc_number"];  
-$expiration = $_POST["cc_exp"];            
+$expiration = $_POST["cc_exp"]; 
+ 
 
 
 // Create connection
@@ -48,7 +50,7 @@ $sql .= "insert into member (member_id, email, card_number, card_expiry) values
 
 if ($conn->multi_query($sql) === TRUE) {
     echo "New records created successfully";
-    header('Location: pages/index.html'); 
+    header('Location: ../php/home.php'); 
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
