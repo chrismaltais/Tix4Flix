@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -74,9 +73,11 @@
             <img class="img-rounded" src="../photos/WolfOfWallStreet.jpg" alt="404 Error" width="360" height="538"> 
           </div>
           <div class="col-md-8">
-          <h1 class="display-3">The Wolf of Wall Street</h1>
-          <h2 class="display-8"> Date, Time and Location(Complex)</h2>
-          <h3 class="display-8"> Number of tickets || Runtime || 4.5/5</h3>
+          <h1 class="display-3"><?php 
+              $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+              echo str_replace("%20", " ", str_replace("http://localhost/github/php/reviews.php?", "", $actual_link)) 
+              ?>
+       </h1> 
           <form class="col-md-15 mb-3" action = "subreview.php" method="POST">
               <label for="review">Type your review here</label>
               <textarea Name = review class="form-control" id="review" rows="4" required></textarea>

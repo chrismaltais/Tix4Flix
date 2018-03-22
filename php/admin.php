@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin - Add Showtime</title>
+    <title>Admin Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
@@ -108,61 +108,67 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Add Showtime</h1>
-            
-          </div>
-
-
-
-          <form class="needs-validation" novalidate method="POST" action="../register.php">
-            <div class="row">
-              <div class="col-md-4 mb-3">
-                <label for="complex">Complex</label>
-                <input Name = complex type="text" class="form-control" id="complex" placeholder="" value="" required>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="screen_id">Screen ID</label>
-                <input Name = screen_id type="text" class="form-control" id="screen_id" placeholder="" value="" required>
-              </div>
-          </div>
-
-          <div class="row">
-
-            <div class="col-md-8 mb-3">
-              <label for="main_actors">Movie Title</label>
-              <input Name=main_actors type="text" class="form-control" id="main_actors" placeholder="" required>
-            </div>
-          </div>
+            <h1 class="h2">Admin Dashboard</h1>
           
-
-          <div class="row">
-          <div class="col-md-4 mb-3">
-              <label for="run_time">Start Time</label>
-              <input Name=run_time type="text" class="form-control" id="run_time" placeholder="" required>
-            </div>
-
-            <div class="col-md-4 mb-3">
-              <label for="rating">Number of Seats</label>
-              <input Name=rating type="text" class="form-control" id="rating" placeholder="" required>
-            </div>
-
-            </div>
-            
-            <div class="col-md-8 mb-3">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Showtime</button>
-            </div>
           </div>
-        </form>
-        </div>
-        </div>
-          
+
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Account Number</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Remove Member</th>
+                  <th>Member Movie History</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <?php
+                      $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "complexdb";
+  
 
 
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+      
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    // Get rating of movie selected in find_movies.php
+    $result = $conn->query("select member.member_id, user_account.fname, user_account.lname from user_account left join on member.email = user_account.email");
+                    while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                  echo "<td>"  . $row["member_id"] . "</td>";
+                  echo "<td>"  . $row["fname"] . "</td>";
+                  echo "<td>"  . $row["lname"] . "</td>";
+                  echo "<td><a class='btn btn-link '  href='#' role='button'>Remove &raquo;</a></td>";
+                  echo "<td><a class='btn btn-link ' href='../pages/admin_movie_history.html' role='button'>Movie History &raquo </a>";
+                      echo "</td>";
+                echo "</tr>";
+                    }
+                      
+                      ?>
+
+   
+
+                <tr>
+                  <td>1,002</td>
+                  <td>Chris</td>
+                  <td>Maltais</td>
+                  <td><a class="btn btn-link" href="#" role="button">Remove &raquo;</a></td>
+                  <td><a class="btn btn-link" href="../pages/admin_movie_history.html" role="button">Movie History &raquo;</a></td>
+                </tr>
 
 
-
-
-
+              </tbody>
+            </table>
+          </div>
         </main>
 
        <footer class="container">

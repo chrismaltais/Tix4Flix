@@ -88,8 +88,10 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Get rating of movie selected in find_movies.php
-    $result = $conn->query("select reservations.num_tickets, movie.run_time, showing.title, showing.start_time, showing.name from reservations left join showing on showing.showing_id = reservations.showing_id left join movie on movie.title = showing.title where reservations.account_num = $user");
+    $result = $conn->query("select reservations.reservation_id, reservations.num_tickets, movie.run_time, showing.title, showing.start_time, showing.name from reservations left join showing on showing.showing_id = reservations.showing_id left join movie on movie.title = showing.title where reservations.account_num = $user");
+
           while($row = $result->fetch_assoc()) {
+            
             echo "<div class='row'>";
           echo "<div class='col-md-4'>";    
             echo "<img class='img-rounded' src='../photos/WolfOfWallStreet.jpg' alt='404 Error' width='360' height='538'> ";
@@ -99,7 +101,7 @@
           echo "<h2 class='display-8'> Date, "  . $row["start_time"] ." and ".$row["name"]." </h2>";
           echo "<h3 class='display-8'> Numebr of Tickets: ". $row["num_tickets"] ." | Run Time: ". $row["run_time"] ." minutes </h3>";
           echo "<p>Thanks for stopping by! If youd like to leave a review for the showing, please click the 'Leave a Review' button"; echo "below. Let us know how we can improve your experience as a viewer, as well as how much you liked the movie!</p>";
-                 echo "<p><a name = '" . $row["title"] . "' class='btn btn-secondary' href='../php/reviews.php?" . $row["title"] . "' role='button'>Leave a Review &raquo;</a></p>";
+          echo "<p><a name = '" . $row["reservation_id"] . "' class='btn btn-secondary' href='../php/cancelres.php?" . $row["reservation_id"] . "' role='button'>Cancel Reservation &raquo;</a></p>";
           echo "</div>";
           echo "</div>";
               }
