@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $servername = "127.0.0.1";
     $username = "root";
     $password = "";
@@ -18,7 +19,6 @@
     // Get all trailers
     // $trailer_query_result = $conn->query("select trailer_link from Movie where title = '");
     // $trailers = mysqli_fetch_array($trailer_query_result)['trailer_link'];
-
     
 
 ?>
@@ -84,7 +84,7 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Come see the hottest films!</h1>
+            <h1 class='display-3'>Browse the hottest movies!</h1> 
           <p>Take a look at available showtimes in theatres near you to get started! All you need to do is pick a theatre, movie, and showtime!</p>
           <p><a class="btn btn-primary btn-lg" href="../php/find_movies.php" role="button">Find Showtimes &raquo;</a></p>
         </div>

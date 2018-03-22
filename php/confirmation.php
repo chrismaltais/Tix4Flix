@@ -1,3 +1,20 @@
+<?php 
+    session_start();
+    $_SESSION['num_tickets'] = $_POST["num_tickets"];
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "complexdb";
+    
+    // Connect DB
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,7 +36,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="../pages/home.html">Tix4flix</a>
+      <a class="navbar-brand" href="../php/home.php">Tix4flix</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,7 +44,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Book Tickets</a>
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a>
           </li>
           </ul>
 
@@ -67,18 +84,55 @@
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-4">
-            <img class="img-rounded" src="../photos/WolfOfWallStreet.jpg" alt="404 Error" width="360" height="538"> 
+            <?php
+                echo "<img class='img-rounded' src='../photos/" . $_SESSION['movie_photo'] . ".jpg' alt='404 Error' width='360' height='538'>";
+              ?>
           </div>
           <div class="col-md-8">
           <h1 class="display-3">Booking Details</h1>
-          <h2 class="display-8"> The Wolf of Wall Street</h2>
-          <h3 class="display-8"> Showing time || 3 tickets || Runtime</h3>
+          <?php
+              echo "<h2 class='display-8'>" . $_SESSION['movie_title'] . "</h2>";
+              echo "<h5 class='display-8'>" . $_SESSION['showing'] . " | Tickets: " . $_SESSION['num_tickets'] . " | Runtime:" .  $_SESSION['runtime'] . " mins</h5>";
+          ?>
+          
           <p>We look forward to seeing you in one of our movie theatres shortly! In the meantime, you can continue to look for other movies that might interest you on our website. Make sure you arrive to the theatre 10-15 minutes before the movie with your movie snacks in hand. Enjoy! </p>
+        
+          <?php
+            // Get last reservation ID to have been created
+            $get_resID_query = $conn->query("select max(reservation_id) from Reservations");
+            
+            // Prep variable so SQL statement (couldn't get $_SESSION vars to work in statement for some reason)
+            $showing = $_SESSION['showing'];
+            $complex = $_SESSION['complex'];
+            $title = $_SESSION['movie_title'];
+            $num_tickets = $_SESSION['num_tickets'];
+            $user_id = $_SESSION['user_id'];
+            
+            // SQL for grabbing showing ID for purchased reservation
+            $sql = "select showing_id from Showing where start_time = '$showing' and name = '$complex' and title = '$title'";
+              
+            $get_showingID_query = $conn->query($sql);
+            
+            $showing_id = mysqli_fetch_array($get_showingID_query)['showing_id'];
+             
+            // Assign new res ID
+            if ($get_resID_query->num_rows > 0) {
+                $next_reservation_id = mysqli_fetch_array($get_resID_query)['max(reservation_id)'] + 1;
+            } else {
+                $next_reservation_id = 1;
+            }
+              
+            $conn->query("insert into Reservations (reservation_id, num_tickets, account_num, showing_id) values
+                        ('$next_reservation_id', $num_tickets, $user_id, '$showing_id')");
+              
+          ?>
 
-          <p><a class="btn btn-secondary" href="../pages/home.html" role="button">Return Home &raquo;</a></p>
+          <p><a class="btn btn-secondary" href="../php/home.php" role="button">Return Home &raquo;</a></p>
 
-          <div class="col-md-4">
-            <img class="img-rounded" src="../photos/checkmark.gif" alt="404 Error" width="200" height="200"> 
+          <div class="col-md-8">
+              <div class="row justify-content-end">
+                <img class="img-rounded" src="../photos/checkmark.gif" alt="404 Error" width="200" height="200">
+              </div>
           </div>
 
 

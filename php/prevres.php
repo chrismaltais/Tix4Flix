@@ -1,23 +1,7 @@
-<?php 
+          <?php 
     session_start();
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "";
-    $dbname = "complexdb";
-
-
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-      
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    // Get rating of movie selected in find_movies.php
-    $result = $conn->query("");
-
 ?>
+  
 <!doctype html>
 <html lang="en">
   <head>
@@ -88,19 +72,42 @@
 
       <div class="container">
         <!-- Example row of columns -->
-        <div class="row">
-          <div class="col-md-4">
-            <img class="img-rounded" src="../photos/WolfOfWallStreet.jpg" alt="404 Error" width="360" height="538"> 
+ <?php 
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "complexdb";
+    $user = $_SESSION["user_id"];
+
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+      
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    // Get rating of movie selected in find_movies.php
+    $result = $conn->query("select reservations.num_tickets, movie.run_time, showing.title, showing.start_time, showing.name from reservations left join showing on showing.showing_id = reservations.showing_id left join movie on movie.title = showing.title where reservations.account_num = $user");
+          while($row = $result->fetch_assoc()) {
+            echo "<div class='row'>";
+          echo "<div class='col-md-4'>";    
+            echo "<img class='img-rounded' src='../photos/WolfOfWallStreet.jpg' alt='404 Error' width='360' height='538'> ";
+          echo "</div>";
+          echo "<div class='col-md-8'>";
+          echo "<h1 class='display-3'>". $row["title"] . " </h1>";
+          echo "<h2 class='display-8'> Date, ". $row["starting_time"] ." and ".$row["name"]." </h2>";
+          echo "<h3 class='display-8'> ". $row["num_tickets"] ." || ". $row["run_time"] ." || 4.5/5</h3>";
+          echo "<p>Thanks for stopping by! If youd like to leave a review for the showing, please click the 'Leave a Review' button"; echo "below. Let us know how we can improve your experience as a viewer, as well as how much you liked the movie!</p>";
+          echo "<p><a class='btn btn-secondary' href='../php/reviews.php' role='button'>Leave a Review &raquo;</a></p>";
+          echo "</div>";
+          echo "</div>";
+              }
+
+       ?>
+
           </div>
-          <div class="col-md-8">
-          <h1 class="display-3">The Wolf of Wall Street</h1>
-          <h2 class="display-8"> Date, Time and Location(Complex)</h2>
-          <h3 class="display-8"> Number of tickets || Runtime || 4.5/5</h3>
-          <p>Thanks for stopping by! If you'd like to leave a review for the showing, please click the "Leave a Review" button below. Let us know how we can improve your experience as a viewer, as well as how much you liked the movie!</p>
-          <p><a class="btn btn-secondary" href="../pages/home.html" role="button">Leave a Review &raquo;</a></p>
-          </div>
-          </div>
-          </div>
+        
           </div>
         </div>
       </div> <!-- /container -->
