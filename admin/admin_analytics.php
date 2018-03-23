@@ -162,7 +162,7 @@
             
             </div>
               <div class="col-md-4 mb-3">
-                <h2>Most Popular Complex</h2>
+                <h2>Most Popular Movie</h2>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <thead>
