@@ -36,70 +36,70 @@ session_start();
             <ul class="nav flex-column">
 
               <li class="nav-item">
-                <a class="nav-link active" href="../pages/admin.html">
+                <a class="nav-link active" href="../admin/admin.php">
                   <span data-feather="home"></span>
                   Admin Dashboard <span class="sr-only">(current)</span>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin.html">
+                <a class="nav-link" href="../admin/admin.php">
                   <span data-feather="users"></span>
                   Manage Customers
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_add_movie.html">
+                <a class="nav-link" href="../admin/admin_add_movie.html">
                   <span data-feather="layers"></span>
                   Add a Movie
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_add_complex.html">
+                <a class="nav-link" href="../admin/admin_add_complex.html">
                   <span data-feather="layers"></span>
                   Add a Complex
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_add_theatre.html">
+                <a class="nav-link" href="../admin/admin_add_theatre_html.php">
                   <span data-feather="layers"></span>
                   Add a Theatre
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_add_showtime.html">
+                <a class="nav-link" href="../admin/admin_add_showtime_html.php">
                   <span data-feather="layers"></span>
                   Add a Showtime
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_analytics.html">
+                <a class="nav-link" href="../admin/admin_analytics.php">
                   <span data-feather="bar-chart-2"></span>
                   Business Analytics
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_edit_complex.html">
+                <a class="nav-link" href="../admin/admin_edit_complex_html.php">
                   <span data-feather="bar-chart-2"></span>
                   Edit Complex
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_analytics.html">
+                <a class="nav-link" href="../admin/admin_edit_theatre_html.php">
                   <span data-feather="bar-chart-2"></span>
                   Edit Theatre
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_analytics.html">
+                <a class="nav-link" href="../admin/edit_showtimes.php">
                   <span data-feather="bar-chart-2"></span>
                   Edit Showing
                 </a>
@@ -120,6 +120,7 @@ session_start();
               <thead>
                 <tr>
                   <th>Showing ID</th>
+                  <th>Movie Title</th>
                   <th>Movie Complex</th>
                   <th>Movie Showtime</th>
                   <th>Submit Changes</th>
@@ -142,13 +143,14 @@ session_start();
         die("Connection failed: " . $conn->connect_error);
     }
     // Get rating of movie selected in find_movies.php
-    $result = $conn->query("select showing_id, name, start_time, date_played from showing");
+    $result = $conn->query("select showing_id, name, start_time, date_played, title from Showing");
                   $counter = 0;
         while($row = $result->fetch_assoc()) {
 if ($_SESSION['current_date'] > $row['date_played']) {  
                 echo "<form method='POST' action=../admin/update_showtime.php?". $row["showing_id"] ."?".$row["name"] ."?". $row["start_time"] ."'";
                 echo "<tr>";
                   echo "<td>". $row["showing_id"] ."</td>";
+                echo "<td>". $row["title"]."</td>";
                   echo "<td><input Name= 'complex".$row["showing_id"]."' type='text' class='form-control' id='complex".$row["showing_id"]."' placeholder='Movie Complex' value='".$row["name"] ."' ></td>";
                   echo "<td><input Name='start_time".$row["showing_id"]."' type='text' class='form-control' id='start_time".$row["showing_id"]."' placeholder='Showtime' value='". $row["start_time"] ."'></td>";
                   echo "<td><button type='submit' class='btn btn-link' role='button'>Update &raquo;</button></td>";

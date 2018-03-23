@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 
 
 $sql = "insert into Theatre_Complex (name, street_name, street_number, postal_code, phone_number) values
-('$complex_name','$phone_num','$street_number','$street_name','$postal_code');";
+('$complex_name','$street_number','$street_name','$postal_code', '$phone_num');";
 
 
 if ($conn->multi_query($sql) === TRUE) {
