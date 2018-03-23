@@ -33,16 +33,16 @@
             <ul class="nav flex-column">
 
               <li class="nav-item">
-                <a class="nav-link active" href="../admin/admin.php">
+                <a class="nav-link active pr-0" href="../admin/admin.php">
                   <span data-feather="home"></span>
-                  Admin Dashboard <span class="sr-only">(current)</span>
+                  Dashboard <span class="sr-only">(current)</span>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="../admin/admin.php">
                   <span data-feather="users"></span>
-                  Manage Customers
+                  Customers
                 </a>
               </li>
 
@@ -84,7 +84,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="../admin/admin_analytics.php">
                   <span data-feather="bar-chart-2"></span>
-                  Business Analytics
+                  BI Analytics
                 </a>
               </li>
 

@@ -102,8 +102,8 @@
           
             <?php
                 while ($row = $result_review->fetch_assoc()) {
-                    echo "<div class='card'>";
-                    echo "<h5 class='card-header'>User: " . $row['fname'] . $row['lname'] . "</h5>";
+                    echo "<div class='card pb-3'>";
+                    echo "<h5 class='card-header'>User: " . $row['fname'] . " " . $row['lname'] . "</h5>";
                     echo "<div class='card-body'>" . $row['review'] . "</div>";
                     echo "</div>";
                 }
