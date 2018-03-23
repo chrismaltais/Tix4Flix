@@ -15,6 +15,7 @@
     $result = $conn->query("select name from Theatre_Complex");
     ?>
 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -24,7 +25,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin - Add Theatre</title>
+    <title>Admin - Edit Complex</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
@@ -125,10 +126,13 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Add Theatre</h1>
+            <h1 class="h2">Edit Theatre Complex</h1>
+            
           </div>
 
-          <form class="needs-validation" novalidate method="POST" action="../admin/admin_add_theatre.php">
+
+
+          <form class="needs-validation" novalidate method="POST" action="../admin/admin_edit_complex.php">
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="complex_name">Complex Name</label>
@@ -142,32 +146,44 @@
                                 echo '<option value="'.$name.'">'.$name.'</option>';
                  
                             }
-                            ?>
+                            ?> 
                         </select>
-                        </div>
+                        </div>  
+
+
+
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
               </div>
               <div class="col-md-4 mb-3">
-                <label for="screen_id">Screen ID</label>
-                <input Name = screen_id type="text" class="form-control" id="screen_id" placeholder="Screen Number" value="" required>
+                <label for="phone_num">Phone Number</label>
+                <input Name = phone_num type="text" class="form-control" id="phone_num" placeholder="" value="" required>
               </div>
           </div>
-
+          
+          <h4 class="mb-3">Address</h4>
             <div class="row">
-            <div class="col-md-4 mb-3">
-              <label for="max_seats">Max Seats</label>
-              <input Name=max_seats type="text" class="form-control" id="max_seats" placeholder="340" required>
+
+            <div class="col-md-2 mb-3">
+              <label for="street_number">Street Number</label>
+              <input Name=street_number type="text" class="form-control" id="street_number" placeholder="" required>
             </div>
 
-            <div class="col-md-4 mb-3">
-              <label for="screen_size">Screen Size</label>
-              <input Name=screen_size type="text" class="form-control" id="screen_size" placeholder="Brock St" required>
+            <div class="col-md-3 mb-3">
+              <label for="street_name">Street Name</label>
+              <input Name=street_name type="text" class="form-control" id="street_name" placeholder="" required>
             </div>
 
+            <div class="col-md-3 mb-3">
+              <label for="postal_code">Postal Code</label>
+              <input Name=postal_code type="text" class="form-control" id="postal_code" placeholder="" required>
+            </div>
             </div>
 
 
             <div class="col-md-8 mb-3">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Complex</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Edit Complex</button>
             </div>
           <hr class="mb-4">
           </div>
@@ -175,7 +191,8 @@
 
           </div>
           </div>
-          
+
+
         </main>
 
        <footer class="container">

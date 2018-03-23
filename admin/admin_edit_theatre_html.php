@@ -24,7 +24,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin - Add Theatre</title>
+    <title>Admin - Edit Theatre</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
@@ -125,14 +125,14 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Add Theatre</h1>
+            <h1 class="h2">Edit Theatre</h1>
           </div>
 
-          <form class="needs-validation" novalidate method="POST" action="../admin/admin_add_theatre.php">
+          <form class="needs-validation" novalidate method="POST" action="../admin/admin_edit_theatre.php">
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="complex_name">Complex Name</label>
-                <form class="d-flex justify-content-around" action="../php/find_showtime.php" method="POST">
+                    <form class="d-flex justify-content-around" action="../php/find_showtime.php" method="POST">
                         <div class="input-group mb-3 pr-3">
                         <select class="custom-select" id="complexselect" name="complex_chosen">
                             <?php
@@ -145,29 +145,30 @@
                             ?>
                         </select>
                         </div>
+
               </div>
               <div class="col-md-4 mb-3">
                 <label for="screen_id">Screen ID</label>
-                <input Name = screen_id type="text" class="form-control" id="screen_id" placeholder="Screen Number" value="" required>
+                <input Name=screen_id type="text" class="form-control" id="screen_id" placeholder="" required>
               </div>
           </div>
 
             <div class="row">
             <div class="col-md-4 mb-3">
               <label for="max_seats">Max Seats</label>
-              <input Name=max_seats type="text" class="form-control" id="max_seats" placeholder="340" required>
+              <input Name=max_seats type="text" class="form-control" id="max_seats" placeholder="" required>
             </div>
 
             <div class="col-md-4 mb-3">
               <label for="screen_size">Screen Size</label>
-              <input Name=screen_size type="text" class="form-control" id="screen_size" placeholder="Brock St" required>
+              <input Name=screen_size type="text" class="form-control" id="screen_size" placeholder="" required>
             </div>
 
             </div>
 
 
             <div class="col-md-8 mb-3">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Complex</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Update Theatre</button>
             </div>
           <hr class="mb-4">
           </div>
