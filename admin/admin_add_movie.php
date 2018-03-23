@@ -13,6 +13,7 @@ $production_company = $_POST["production_company"];
 $start_date = $_POST["start_date"]; 
 $end_date = $_POST["end_date"]; 
 $main_actors = $_POST["main_actors"];  
+$supplier = $_POST["supplier"]; 
 
  
 
@@ -24,31 +25,20 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
  
-$sql = "select max(member_id) from member";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $nextmemberid = mysqli_fetch_array($result)['max(member_id)'] + 1;
-}
-
-else {
-    $nextmemberid = 1;
-}
 
 
 $sql = "insert into Movie (title, plot_synopsis, run_time, rating, director, production_company,
-postal_code, phone_number) values
-('$email','$password','$fname', '$lname','$streetname',$streetnumber,'$postalcode', '$phonenumber');";
+start_date, end_date, supplier) values
+('$title','$synopsis','$run_time','$rating','$director','$production_company','$start_date', '$end_date', '$supplier');";
 
 
-$sql .= "insert into member (member_id, email, card_number, card_expiry) values
-($nextmemberid, '$email','$creditcardnumber','$expiration')";
+$sql .= "insert into Movie_Actors(title, main_actor) values ('$title', '$main_actors')";
 
 
 
 if ($conn->multi_query($sql) === TRUE) {
     echo "New records created successfully";
-    header('Location: ../php/home.php'); 
+    header('Location: ../admin/admin.php'); 
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

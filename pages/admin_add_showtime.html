@@ -1,3 +1,22 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $passworddb = "";
+    $dbname = "complexdb"; 
+    
+    // Create connection
+    $conn = new mysqli($servername, $username, $passworddb, $dbname);
+      
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    $result = $conn->query("select name from Theatre_Complex");
+    $result2 = $conn->query("select screen_id from Theatre");
+    ?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -118,11 +137,35 @@
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="complex">Complex</label>
-                <input Name = complex type="text" class="form-control" id="complex" placeholder="" value="" required>
+                <form class="d-flex justify-content-around" action="../php/find_showtime.php" method="POST">
+                        <div class="input-group mb-3 pr-3">
+                        <select class="custom-select" id="complexselect" name="complex_chosen">
+                            <?php
+                            while ($row = $result->fetch_assoc()) {
+                                unset($id, $name);
+                                $name = $row['name']; 
+                                echo '<option value="'.$name.'">'.$name.'</option>';
+                 
+                            }
+                            ?>
+                        </select>
+                        </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="screen_id">Screen ID</label>
-                <input Name = screen_id type="text" class="form-control" id="screen_id" placeholder="" value="" required>
+                <form class="d-flex justify-content-around" action="../php/find_showtime.php" method="POST">
+                        <div class="input-group mb-3 pr-3">
+                        <select class="custom-select" id="complexselect" name="complex_chosen">
+                            <?php
+                            while ($row = $result2->fetch_assoc()) {
+                                unset($id, $name);
+                                $name = $row['screen_id']; 
+                                echo '<option value="'.$name.'">'.$name.'</option>';
+                 
+                            }
+                            ?>
+                        </select>
+                        </div>
               </div>
           </div>
 

@@ -1,3 +1,20 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $passworddb = "";
+    $dbname = "complexdb"; 
+    
+    // Create connection
+    $conn = new mysqli($servername, $username, $passworddb, $dbname);
+      
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    $result = $conn->query("select name from Theatre_Complex");
+    ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -111,7 +128,7 @@
             <h1 class="h2">Add Theatre</h1>
           </div>
 
-          <form class="needs-validation" novalidate method="POST" action="../register.php">
+          <form class="needs-validation" novalidate method="POST" action="../admin/admin_add_theatre.php">
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="complex_name">Complex Name</label>

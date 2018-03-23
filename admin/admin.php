@@ -149,7 +149,7 @@
                 echo  "<td>". $row["fname"] ."</td>";
                 echo  "<td>". $row["lname"] ."</td>";
                 echo  "<td><a class='btn btn-link ' href='#' role='button'>Remove &raquo;</a></td>";
-                echo  "<td><a class='btn btn-link ' href='../php/admin_movie_history.php?" . $row["member_id"] . "' role='button'>Movie History &raquo</a>";
+                echo  "<td><a class='btn btn-link ' href='../admin/admin_movie_history.php?" . $row["member_id"] . "' role='button'>Movie History &raquo</a>";
                 echo "</td>";
                 echo "</tr>";
           }

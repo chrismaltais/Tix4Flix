@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin - Add Theatre</title>
+    <title>Admin - Add Movie</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
@@ -108,57 +108,96 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Add Theatre</h1>
+            <h1 class="h2">Add Movie</h1>
+            
           </div>
 
-          <form class="needs-validation" novalidate method="POST" action="../register.php">
+
+
+          <form class="needs-validation" novalidate method="POST" action="../php/admin_add_movie.php">
             <div class="row">
               <div class="col-md-4 mb-3">
-                <label for="complex_name">Complex Name</label>
-                <form class="d-flex justify-content-around" action="../php/find_showtime.php" method="POST">
-                        <div class="input-group mb-3 pr-3">
-                        <select class="custom-select" id="complexselect" name="complex_chosen">
-                            <?php
-                            while ($row = $result->fetch_assoc()) {
-                                unset($id, $name);
-                                $name = $row['name']; 
-                                echo '<option value="'.$name.'">'.$name.'</option>';
-                 
-                            }
-                            ?>
-                        </select>
-                        </div>
+                <label for="title">Movie Title</label>
+                <input Name = title type="text" class="form-control" id="title" placeholder="Movie title" value="" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
               </div>
               <div class="col-md-4 mb-3">
-                <label for="screen_id">Screen ID</label>
-                <input Name = screen_id type="text" class="form-control" id="screen_id" placeholder="Screen Number" value="" required>
+                <label for="synopsis">Plot Synopsis</label>
+                <input Name = synopsis type="text" class="form-control" id="synopsis" placeholder="Plot Synopsis" value="" required>
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
               </div>
-          </div>
-
-            <div class="row">
-            <div class="col-md-4 mb-3">
-              <label for="max_seats">Max Seats</label>
-              <input Name=max_seats type="text" class="form-control" id="max_seats" placeholder="340" required>
-            </div>
-
-            <div class="col-md-4 mb-3">
-              <label for="screen_size">Screen Size</label>
-              <input Name=screen_size type="text" class="form-control" id="screen_size" placeholder="Brock St" required>
-            </div>
-
-            </div>
-
-
-            <div class="col-md-8 mb-3">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Complex</button>
-            </div>
-          <hr class="mb-4">
-          </div>
-          </form>
-
-          </div>
           </div>
           
+
+          <div class="row">
+          <div class="col-md-1 mb-3">
+              <label for="run_time">Run Time</label>
+              <input Name=run_time type="text" class="form-control" id="run_time" placeholder="123" required>
+            </div>
+
+            <div class="col-md-1 mb-3">
+              <label for="rating">Rating</label>
+              <input Name=rating type="text" class="form-control" id="rating" placeholder="" required>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label for="director">Director</label>
+              <input Name=director type="text" class="form-control" id="director" placeholder="" required>     
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label for="production_company">Production Company</label>
+              <input Name=production_company type="text" class="form-control" id="production_company" placeholder="" required>   
+            </div>
+            </div>
+            <div class="row">
+
+            <div class="col-md-4 mb-3">
+              <label for="start_date">Start Date</label>
+              <input Name=start_date type="text" class="form-control" id="start_date" placeholder="340" required>
+            </div>
+
+            <div class="col-md-4 mb-3">
+              <label for="end_date">End Date</label>
+              <input Name=end_date type="text" class="form-control" id="end_date" placeholder="Brock St" required>
+            </div>
+
+          </div>
+
+
+          <div class="row">
+
+            <div class="col-md-4 mb-3">
+              <label for="main_actors">Main Actors</label>
+              <input Name=main_actors type="text" class="form-control" id="main_actors" placeholder="Seperate by a comma" required>
+            </div>
+              
+            <div class="col-md-4 mb-3">
+              <label for="supplier">Supplier</label>
+              <input Name=supplier type="text" class="form-control" id="supplier" placeholder="Seperate by a comma" required>
+            </div>
+
+
+          <hr class="mb-4">
+            <div class="col-md-8 mb-3">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Movie</button>
+            </div>
+          </div>
+        </form>
+        </div>
+        </div>
+          
+
+
+
+
+
+
+
         </main>
 
        <footer class="container">

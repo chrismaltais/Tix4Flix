@@ -127,7 +127,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
     $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $actual_link_adj = str_replace("http://localhost/github/php/admin_movie_history.php?", "", $actual_link);
+    $actual_link_adj = str_replace("http://localhost/github/admin/admin_movie_history.php?", "", $actual_link);
     $result = $conn->query("select Member.member_id, User_Account.fname, User_Account.lname from User_Account right join Member on Member.email = User_Account.email where Member.member_id = ' $actual_link_adj '");
 
           while($row = $result->fetch_assoc()) {

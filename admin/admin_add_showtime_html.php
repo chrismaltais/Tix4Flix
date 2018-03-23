@@ -1,3 +1,22 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $passworddb = "";
+    $dbname = "complexdb"; 
+    
+    // Create connection
+    $conn = new mysqli($servername, $username, $passworddb, $dbname);
+      
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    $result = $conn->query("select name from Theatre_Complex");
+    $result2 = $conn->query("select title from Movie");
+    ?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,7 +26,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin - Add Complex</title>
+    <title>Admin - Add Showtime</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
@@ -108,55 +127,90 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Add Theatre Complex</h1>
+            <h1 class="h2">Add Showtime</h1>
+            
           </div>
 
 
 
-          <form class="needs-validation" novalidate method="POST" action="../register.php">
+          <form class="needs-validation" novalidate method="POST" action="../admin/admin_add_showtime.php">
             <div class="row">
               <div class="col-md-4 mb-3">
-                <label for="complex_name">Complex Name</label>
-                <input Name = complex_name type="text" class="form-control" id="complex_name" placeholder="Complex Name" value="" required>
-                <div class="invalid-feedback">
-                  Valid first name is required.
-                </div>
+                <label for="complex">Complex</label>
+                <form class="d-flex justify-content-around" action="../php/find_showtime.php" method="POST">
+                        <div class="input-group mb-3 pr-3">
+                        <select class="custom-select" id="complexselect" name="complex_chosen">
+                            <?php
+                            while ($row = $result->fetch_assoc()) {
+                                unset($id, $name);
+                                $name = $row['name']; 
+                                echo '<option value="'.$name.'">'.$name.'</option>';
+                 
+                            }
+                            ?>
+                        </select>
+                        </div>
               </div>
               <div class="col-md-4 mb-3">
-                <label for="phone_num">Phone Number</label>
-                <input Name = phone_num type="text" class="form-control" id="phone_num" placeholder="Phone Number" value="" required>
+                <label for="screen_id">Screen ID</label>
+                <form class="d-flex justify-content-around" action="../php/find_showtime.php" method="POST">
+                        <div class="input-group mb-3 pr-3">
+                            <input Name=screen_id type="text" class="form-control" id="screen_id" placeholder="" required>
+                        </select>
+                        </div>
               </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-4 mb-3">
+              <label for="main_actors">Movie Title</label>
+              <form class="d-flex justify-content-around" action="../php/find_showtime.php" method="POST">
+                        <div class="input-group mb-3 pr-3">
+                        <select class="custom-select" id="movieselect" name="movie_chosen">
+                            <?php
+                            while ($row = $result2->fetch_assoc()) {
+                                unset($id, $name);
+                                $name = $row['title']; 
+                                echo '<option value="'.$name.'">'.$name.'</option>';
+                 
+                            }
+                            ?>
+                        </select>
+                        </div>
+            `</div>
+                
+            <div class="col-md-4 mb-3">
+              <label for="date">Date Showing</label>
+              <input Name=date type="text" class="form-control" id="date" placeholder="YYYY/MM/DD" required>
+            </div>
+                
+                
+                
+                
           </div>
           
-          <h4 class="mb-3">Address</h4>
-            <div class="row">
 
-            <div class="col-md-2 mb-3">
-              <label for="street_number">Street Number</label>
-              <input Name=street_number type="text" class="form-control" id="street_number" placeholder="340" required>
+          <div class="row">
+          <div class="col-md-4 mb-3">
+              <label for="start_time">Start Time</label>
+              <input Name=start_time type="text" class="form-control" id="start_time" placeholder="" required>
             </div>
 
-            <div class="col-md-3 mb-3">
-              <label for="street_name">Street Name</label>
-              <input Name=street_name type="text" class="form-control" id="street_name" placeholder="Brock St" required>
+            <div class="col-md-4 mb-3">
+              <label for="num_seats">Number of Seats</label>
+              <input Name=num_seats type="text" class="form-control" id="sum_seats" placeholder="" required>
             </div>
 
-            <div class="col-md-3 mb-3">
-              <label for="postal_code">Postal Code</label>
-              <input Name=postal_code type="text" class="form-control" id="postal_code" placeholder="K7L1S8" required>
             </div>
-            </div>
-
-
+            
             <div class="col-md-8 mb-3">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Complex</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Showtime</button>
             </div>
-          <hr class="mb-4">
           </div>
-          </form>
-
-          </div>
-          </div>
+        </form>
+        </div>
+        </div>
           
 
 
