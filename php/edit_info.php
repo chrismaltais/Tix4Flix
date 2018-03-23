@@ -112,7 +112,7 @@
         <h2>Edit User Information</h2>
         <p class="lead">Edit any information, just make sure to press save!</p>
       </div>
-        <div class="col-md-10 order-md-1">
+        <div class="col-md-12 order-md-1">
           <h4 class="mb-3">Edit Info</h4>
           <form class="needs-validation" novalidate method="POST" action="../php/updateInfo.php">
             <div class="row">
@@ -132,7 +132,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-10 order-md-1">
+          <div class="col-md-12 order-md-1">
            <div class="row">
             <div class="col-md-6 mb-3">
               <label for="street_number">Phone Number</label>
@@ -144,7 +144,7 @@
           </div>
         </div>
 
-          <div class="col-md-10 order-md-1">
+          <div class="col-md-12 order-md-1">
           <div class="row">
           <div class="col-md-6 mb-3">
               <label for="street_number">Password</label>
@@ -161,7 +161,7 @@
             </div>
           </div>
 
-          <div class="col-md-10 order-md-1">
+          <div class="col-md-12 order-md-1">
             <h4 class="mb-3">Address</h4>
             <div class="row">
 
@@ -182,7 +182,7 @@
             </div>
           </div>
 
-          <div class="col-md-10 order-md-1">
+          <div class="col-md-12 order-md-1">
             <h4 class="mb-3">Payment</h4>
             <div class="row">
               <div class="col-md-4 mb-3">
