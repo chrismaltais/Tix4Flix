@@ -34,7 +34,7 @@ $result = $conn->query($sqlsupp);
         echo "New records created successfully";
         header('Location: ../admin/admin.php'); 
     } else {
-        header('Location: ../admin/suppliers.php'); 
+        header('Location: ../admin/admin_add_supplier.html'); 
     }
 
 
