@@ -52,7 +52,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Book Tickets</a>
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a>
           </li>
           </ul>
 
@@ -145,22 +145,6 @@
                 // 3. Keep close row div on outside
             ?>
           
-          <!-- HTML for PHP Above (loops through movies in DB) -->
-            <!-- <div class="col-md-4">
-            <h2>Harry Potter</h2>
-            <img src="../photos/Goblet_of_Fire.jpg" class="img-rounded" alt="404 Error" width="330" height="494"> 
-            <div class="row">
-            <div class="col-md-3 mb-3">
-            <p><a class="btn btn-secondary" href="https://www.youtube.com/watch?v=3EGojp4Hh6I" role="button">Trailer &raquo;</a></p>
-            </div>
-            <div class="col-md-4 mb-3">
-            <p><a class="btn btn-secondary" href="#" role="button">Showtimes &raquo;</a></p>
-            </div>
-            <div class="col-md-4 mb-3">
-            <p><a class="btn btn-secondary" href="#" role="button">Reviews &raquo;</a></p>
-            </div>
-          </div>
-          </div> -->
         </div>
 
       </div> <!-- /container -->

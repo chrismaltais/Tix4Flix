@@ -21,7 +21,7 @@
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Tix4flix Admin</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
+          <a class="nav-link" href="../pages/index.html">Sign out</a>
         </li>
       </ul>
     </nav>
@@ -33,14 +33,14 @@
             <ul class="nav flex-column">
 
               <li class="nav-item">
-                <a class="nav-link active" href="../pages/admin.html">
+                <a class="nav-link active" href="../admin/admin.php">
                   <span data-feather="home"></span>
                   Admin Dashboard <span class="sr-only">(current)</span>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin.html">
+                <a class="nav-link" href="../admin/admin.php">
                   <span data-feather="users"></span>
                   Manage Customers
                 </a>
@@ -148,7 +148,7 @@
                 echo  "<td>". $row["member_id"] ."</td>";
                 echo  "<td>". $row["fname"] ."</td>";
                 echo  "<td>". $row["lname"] ."</td>";
-                echo  "<td><a class='btn btn-link ' href='#' role='button'>Remove &raquo;</a></td>";
+                echo  "<td><a class='btn btn-link ' href='../admin/remove.php?" . $row["member_id"] . "' role='button'>Remove &raquo;</a></td>";
                 echo  "<td><a class='btn btn-link ' href='../admin/admin_movie_history.php?" . $row["member_id"] . "' role='button'>Movie History &raquo</a>";
                 echo "</td>";
                 echo "</tr>";

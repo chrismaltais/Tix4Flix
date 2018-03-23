@@ -32,7 +32,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Book Tickets</a>
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a>
           </li>
           </ul>
 
@@ -46,9 +46,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Settings</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="../pages/edit_info.html">Edit Personal Info</a>
-              <a class="dropdown-item" href="#">My Reservations</a>
-              <a class="dropdown-item" href="#">Reservation History</a>
+              <a class="dropdown-item" href="../php/edit_info.php">Edit Personal Info</a>
+              <a class="dropdown-item" href="../php/newres.php">My Reservations</a>
+              <a class="dropdown-item" href="../php/prevres.php">Reservation History</a>
               <a class="dropdown-item" href="../pages/index.html">Logout</a>
             </div>
           </li>
@@ -89,34 +89,35 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Get rating of movie selected in find_movies.php
-    $result = $conn->query("select Reservations.num_tickets, Movie.run_time, Showing.title, Showing.start_time, Showing.name, Movie.plot_synopsis from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num = $user");
+    $result = $conn->query("select Reservations.num_tickets, Movie.run_time, Showing.title, Showing.start_time, Showing.name, Movie.plot_synopsis, Showing.date_played from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num = $user");
         while($row = $result->fetch_assoc()) {
-            $movie = "";
-            echo "<div class='row pb-4'>";
-            echo "<div class='col-md-4'>";    
-            $line1 = "<img class='img-rounded' src='../photos/";
-            $words = explode(" ", $row['title']);
-            $num_words_in_movie = count($words);
-            for ($i = 0; $i < $num_words_in_movie; $i++){  
-                if ($i == $num_words_in_movie - 1) {
-                    $movie = $movie . $words[$i];
-                } else {
-                    $movie = $movie . $words[$i] . "%20";
+            if ($_SESSION['current_date'] > $row['date_played']) {
+                $movie = "";
+                echo "<div class='row pb-4'>";
+                echo "<div class='col-md-4'>";    
+                $line1 = "<img class='img-rounded' src='../photos/";
+                $words = explode(" ", $row['title']);
+                $num_words_in_movie = count($words);
+                for ($i = 0; $i < $num_words_in_movie; $i++){  
+                    if ($i == $num_words_in_movie - 1) {
+                        $movie = $movie . $words[$i];
+                    } else {
+                        $movie = $movie . $words[$i] . "%20";
+                    }
                 }
-            }
-            $_SESSION['movie_photo'] = $movie;
-            echo $line1 . $movie . ".jpg' alt='404 Error' width='360' height='538'>";
-            echo "</div>";
-            echo "<div class='col-md-8'>";
-            echo "<h1 class='display-3'> "  . $row["title"] . " </h1>";
-            echo "<h2 class='display-8'> Date, "  . $row["start_time"] ." at ".$row["name"]." </h2>";
-            echo "<h3 class='display-8'> Tickets: ". $row["num_tickets"] ." | Run Time: ". $row["run_time"] ." mins</h3>";
-            echo "<p>" . $row['plot_synopsis']. "</p>";
-                 echo "<p><a name = '" . $row["title"] . "' class='btn btn-secondary' href='../php/reviews.php?" . $row["title"] . "' role='button'>Leave a Review &raquo;</a></p>";
-            echo "</div>";
-            echo "</div>";
+                $_SESSION['movie_photo'] = $movie;
+                echo $line1 . $movie . ".jpg' alt='404 Error' width='360' height='538'>";
+                echo "</div>";
+                echo "<div class='col-md-8'>";
+                echo "<h1 class='display-3'> "  . $row["title"] . " </h1>";
+                echo "<h2 class='display-8'> Date, "  . $row["start_time"] ." at ".$row["name"]." </h2>";
+                echo "<h3 class='display-8'> Tickets: ". $row["num_tickets"] ." | Run Time: ". $row["run_time"] ." mins</h3>";
+                echo "<p>" . $row['plot_synopsis']. "</p>";
+                echo "<p><a name = '" . $row["title"] . "' class='btn btn-secondary' href='../php/reviews.php?" . $row["title"] . "' role='button'>Leave a Review &raquo;</a></p>";
+                echo "</div>";
+                echo "</div>";
               }
-
+        }    
        ?>
 
           </div>

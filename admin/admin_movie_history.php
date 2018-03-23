@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -176,23 +179,38 @@
                 </tr>
               </thead>
               <tbody>
-                
+                  <?php 
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "complexdb";
 
-                <tr>
-                  <td>1,001</td>
-                  <td>Cineplex Odeon</td>
-                  <td>Wolf of Wall St</td>
-                  <td>4:30</td>
-                  <td>3</td>
-                </tr>
 
-                <tr>
-                  <td>1,001</td>
-                  <td>Cineplex Odeon</td>
-                  <td>Wolf of Wall St</td>
-                  <td>10:20</td>
-                  <td>2</td>
-                </tr>
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+      
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $actual_link_adj = str_replace("http://localhost/github/admin/admin_movie_history.php?", "", $actual_link);
+    $result = $conn->query("select Showing.date_played, Reservations.reservation_id,Showing.name, Movie.title,Showing.start_time,Reservations.num_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num  = ' $actual_link_adj '");
+
+          while($row = $result->fetch_assoc()) {
+               if ($_SESSION['current_date'] < $row['date_played']) {
+                    echo "<tr>";
+                  echo "<td>". $row["reservation_id"] ."</td>";
+                  echo "<td>". $row["name"] ."</td>";
+                  echo "<td>". $row["title"] ."</td>";
+                  echo "<td>". $row["start_time"] ."</td>";
+                  echo "<td>". $row["num_tickets"] ."</td>";
+                echo "</tr>";
+               }
+         
+}
+?>
+
+               
 
 
               </tbody>
@@ -214,22 +232,36 @@
                 </tr>
               </thead>
               <tbody>
+       <?php 
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "complexdb";
 
-                <tr>
-                  <td>1,001</td>
-                  <td>Cineplex Odeon</td>
-                  <td>Wolf of Wall St</td>
-                  <td>4:30</td>
-                  <td>3</td>
-                </tr>
 
-                <tr>
-                  <td>1,001</td>
-                  <td>Cineplex Odeon</td>
-                  <td>Wolf of Wall St</td>
-                  <td>10:20</td>
-                  <td>2</td>
-                </tr>
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+      
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $actual_link_adj = str_replace("http://localhost/github/admin/admin_movie_history.php?", "", $actual_link);
+    $result = $conn->query("select Showing.date_played, Reservations.reservation_id,Showing.name, Movie.title,Showing.start_time,Reservations.num_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num  = ' $actual_link_adj '");
+
+          while($row = $result->fetch_assoc()) {
+               if ($_SESSION['current_date'] > $row['date_played']) {
+          echo "<tr>";
+                  echo "<td>". $row["reservation_id"] ."</td>";
+                  echo "<td>". $row["name"] ."</td>";
+                  echo "<td>". $row["title"] ."</td>";
+                  echo "<td>". $row["start_time"] ."</td>";
+                  echo "<td>". $row["num_tickets"] ."</td>";
+                echo "</tr>";
+               }
+         
+}
+?>
 
 
               </tbody>
