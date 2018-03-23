@@ -24,24 +24,18 @@ $conn = new mysqli($servername, $username, $passworddb, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
- 
 
-
-$sql = "insert into Movie (title, plot_synopsis, run_time, rating, director, production_company,
-start_date, end_date, supplier) values
-('$title','$synopsis','$run_time','$rating','$director','$production_company','$start_date', '$end_date', '$supplier');";
-
-
-$sql .= "insert into Movie_Actors(title, main_actor) values ('$title', '$main_actors')";
-
-
-
-if ($conn->multi_query($sql) === TRUE) {
-    echo "New records created successfully";
-    header('Location: ../admin/admin.php'); 
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
+$sqlsupp = "select * from Supplier where company_name = '$supplier' ";
+$result = $conn->query($sqlsupp);
+    if (mysqli_num_rows($result)!=0) {
+        $sql = "insert into Movie (title, plot_synopsis, run_time, rating, director, production_company, start_date, end_date, supplier) values ('$title','$synopsis','$run_time','$rating','$director','$production_company','$start_date', '$end_date', '$supplier');";
+        $sql .= "insert into Movie_Actors(title, main_actor) values ('$title', '$main_actors');";
+        $conn->multi_query($sql);
+        echo "New records created successfully";
+        header('Location: ../admin/admin.php'); 
+    } else {
+        header('Location: ../admin/suppliers.php'); 
+    }
 
 
 $conn->close();
