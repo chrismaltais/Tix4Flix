@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $link_exploded = explode("?", $actual_link);
+    $movie = str_replace("%20", " ", $link_exploded[1]);
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,7 +26,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="../pages/home.html">Tix4flix</a>
+      <a class="navbar-brand" href="../php/home.php">Tix4flix</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,7 +34,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Book Tickets</a>
+            <a class="nav-link" href="../php/find_movies.php">Book Tickets</a>
           </li>
           </ul>
 
@@ -39,11 +46,11 @@
 
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Settings</a>
+            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Settings</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="../pages/edit_info.html">Edit Personal Info</a>
-              <a class="dropdown-item" href="#">My Reservations</a>
-              <a class="dropdown-item" href="#">Reservation History</a>
+              <a class="dropdown-item" href="../php/edit_info.php">Edit Personal Info</a>
+              <a class="dropdown-item" href="../php/newres.php">My Reservations</a>
+              <a class="dropdown-item" href="../php/prevres.php">Reservation History</a>
               <a class="dropdown-item" href="../pages/index.html">Logout</a>
             </div>
           </li>
@@ -70,14 +77,12 @@
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-4">
-            <img class="img-rounded" src="../photos/WolfOfWallStreet.jpg" alt="404 Error" width="360" height="538"> 
+            <?php
+              echo "<img class='img-rounded' src='../photos/" . $link_exploded[1] . ".jpg' alt='404 Error' width='360' height='538'>";
+            ?>
           </div>
           <div class="col-md-8">
-          <h1 class="display-3"><?php 
-              $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-              echo str_replace("%20", " ", str_replace("http://localhost/github/php/reviews.php?", "", $actual_link)) 
-              ?>
-       </h1> 
+          <h1 class="display-3"><?php echo $movie; ?></h1> 
           <form class="col-md-15 mb-3" action = "subreview.php" method="POST">
               <label for="review">Type your review here</label>
               <textarea Name = review class="form-control" id="review" rows="4" required></textarea>

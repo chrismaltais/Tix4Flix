@@ -1,5 +1,6 @@
-          <?php 
+<?php 
     session_start();
+    
 ?>
   
 <!doctype html>
@@ -88,20 +89,32 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Get rating of movie selected in find_movies.php
-    $result = $conn->query("select Reservations.num_tickets, Movie.run_time, Showing.title, Showing.start_time, Showing.name from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num = $user");
-          while($row = $result->fetch_assoc()) {
-            echo "<div class='row'>";
-          echo "<div class='col-md-4'>";    
-            echo "<img class='img-rounded' src='../photos/WolfOfWallStreet.jpg' alt='404 Error' width='360' height='538'> ";
-          echo "</div>";
-          echo "<div class='col-md-8'>";
-          echo "<h1 class='display-3'> "  . $row["title"] . " </h1>";
-          echo "<h2 class='display-8'> Date, "  . $row["start_time"] ." and ".$row["name"]." </h2>";
-          echo "<h3 class='display-8'> Numebr of Tickets: ". $row["num_tickets"] ." | Run Time: ". $row["run_time"] ." minutes </h3>";
-          echo "<p>Thanks for stopping by! If youd like to leave a review for the showing, please click the 'Leave a Review' button"; echo "below. Let us know how we can improve your experience as a viewer, as well as how much you liked the movie!</p>";
+    $result = $conn->query("select Reservations.num_tickets, Movie.run_time, Showing.title, Showing.start_time, Showing.name, Movie.plot_synopsis from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num = $user");
+        while($row = $result->fetch_assoc()) {
+            $movie = "";
+            echo "<div class='row pb-4'>";
+            echo "<div class='col-md-4'>";    
+            $line1 = "<img class='img-rounded' src='../photos/";
+            $words = explode(" ", $row['title']);
+            $num_words_in_movie = count($words);
+            for ($i = 0; $i < $num_words_in_movie; $i++){  
+                if ($i == $num_words_in_movie - 1) {
+                    $movie = $movie . $words[$i];
+                } else {
+                    $movie = $movie . $words[$i] . "%20";
+                }
+            }
+            $_SESSION['movie_photo'] = $movie;
+            echo $line1 . $movie . ".jpg' alt='404 Error' width='360' height='538'>";
+            echo "</div>";
+            echo "<div class='col-md-8'>";
+            echo "<h1 class='display-3'> "  . $row["title"] . " </h1>";
+            echo "<h2 class='display-8'> Date, "  . $row["start_time"] ." at ".$row["name"]." </h2>";
+            echo "<h3 class='display-8'> Tickets: ". $row["num_tickets"] ." | Run Time: ". $row["run_time"] ." mins</h3>";
+            echo "<p>" . $row['plot_synopsis']. "</p>";
                  echo "<p><a name = '" . $row["title"] . "' class='btn btn-secondary' href='../php/reviews.php?" . $row["title"] . "' role='button'>Leave a Review &raquo;</a></p>";
-          echo "</div>";
-          echo "</div>";
+            echo "</div>";
+            echo "</div>";
               }
 
        ?>

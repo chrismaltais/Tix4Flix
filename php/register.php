@@ -26,7 +26,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
  
-$sql = "select max(member_id) from member";
+$sql = "select max(member_id) from Member";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -43,14 +43,14 @@ postal_code, phone_number) values
 ('$email','$password','$fname', '$lname','$streetname',$streetnumber,'$postalcode', '$phonenumber');";
 
 
-$sql .= "insert into member (member_id, email, card_number, card_expiry) values
+$sql .= "insert into Member (member_id, email, card_number, card_expiry) values
 ($nextmemberid, '$email','$creditcardnumber','$expiration')";
 
 
 
 if ($conn->multi_query($sql) === TRUE) {
     echo "New records created successfully";
-    header('Location: ../php/home.php'); 
+    header('Location: ../pages/index.html?success'); 
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

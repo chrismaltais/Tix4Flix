@@ -4,9 +4,12 @@ $servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "complexdb";
+$today = strtotime("Yesterday"); //???? Why won't it work for today
 $recemail = $_POST["email"];                      
 $recpass = $_POST["password"];
 $_SESSION["email"] = $recemail;
+$_SESSION['current_date'] = date("Y-m-d", $today);
+echo $_SESSION['current_date'];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -25,12 +28,12 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "email: " . $row["email"]. " - _password: " . $row["_password"].  "<br>";
+        // echo "email: " . $row["email"]. " - _password: " . $row["_password"].  "<br>";
 	echo "You have successfully logged into the database"; 
 	header('Location: ../php/home.php'); 
     }
 } else {
-    echo "0 results";
+    header('Location: ../pages/index.html?loginInvalid');
 }
 $conn->close();
 ?>

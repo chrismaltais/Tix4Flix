@@ -73,7 +73,6 @@
     
     $result = $conn->query("select name from Theatre_Complex");
     $result2 = $conn->query("select title from Movie");
-    $result3 = $conn->query("select title from Movie");
     ?>
       
     <main role="main">
