@@ -1,3 +1,25 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $passworddb = "";
+    $dbname = "complexdb";
+    
+    // Create connection
+    $conn = new mysqli($servername, $username, $passworddb, $dbname);
+      
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    $result1 = $conn->query("select Showing.name, sum(Reservations.num_tickets) as total_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title group by Showing.name order by sum(Reservations.num_tickets) desc");
+
+    $result = $conn->query("select Movie.title, sum(Reservations.num_tickets) as total_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title group by Movie.title order by sum(Reservations.num_tickets) desc");
+
+    $conn->close();
+    ?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,7 +29,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin - Add Movie</title>
+    <title>Admin - Analytics</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
@@ -108,91 +130,70 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Add Movie</h1>
+            <h1 class="h2">Business Analytics</h1>
             
           </div>
-
-
-
-          <form class="needs-validation" novalidate method="POST" action="../php/admin_add_movie.php">
+            
             <div class="row">
               <div class="col-md-4 mb-3">
-                <label for="title">Movie Title</label>
-                <input Name = title type="text" class="form-control" id="title" placeholder="Movie title" value="" required>
-                <div class="invalid-feedback">
-                  Valid first name is required.
-                </div>
-              </div>
+                <h2>Most Popular Complex</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                            <th>Complex</th>
+                            <th>Tickets Sold</th>
+                            </tr>
+                            </thead>
+              <tbody>
+                  <?php
+                  
+                while($row = $result1->fetch_assoc()) {
+                echo "<tr>";
+                echo  "<td>". $row["name"] ."</td>";
+                echo  "<td>". $row["total_tickets"] ."</td>";
+                echo "</tr>";
+                }
+                  ?>
+             </tbody>
+            </table>
+          </div>
+
+            
+            </div>
               <div class="col-md-4 mb-3">
-                <label for="synopsis">Plot Synopsis</label>
-                <input Name = synopsis type="text" class="form-control" id="synopsis" placeholder="Plot Synopsis" value="" required>
-                <div class="invalid-feedback">
-                  Valid last name is required.
-                </div>
-              </div>
+                <h2>Most Popular Complex</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                            <th>Complex</th>
+                            <th>Tickets Sold</th>
+                            </tr>
+                            </thead>
+              <tbody>
+                <?php
+                  
+                while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo  "<td>". $row["title"] ."</td>";
+                echo  "<td>". $row["total_tickets"] ."</td>";
+                echo "</tr>";
+                }
+                  ?>
+
+
+              </tbody>
+            </table>
           </div>
+         
           
 
-          <div class="row">
-          <div class="col-md-1 mb-3">
-              <label for="run_time">Run Time</label>
-              <input Name=run_time type="text" class="form-control" id="run_time" placeholder="123" required>
-            </div>
-
-            <div class="col-md-1 mb-3">
-              <label for="rating">Rating</label>
-              <input Name=rating type="text" class="form-control" id="rating" placeholder="" required>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <label for="director">Director</label>
-              <input Name=director type="text" class="form-control" id="director" placeholder="" required>     
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <label for="production_company">Production Company</label>
-              <input Name=production_company type="text" class="form-control" id="production_company" placeholder="" required>   
-            </div>
-            </div>
-            <div class="row">
-
-            <div class="col-md-4 mb-3">
-              <label for="street_number">Start Date</label>
-              <input Name=street_number type="text" class="form-control" id="street_number" placeholder="340" required>
-            </div>
-
-            <div class="col-md-4 mb-3">
-              <label for="street_name">End Date</label>
-              <input Name=street_name type="text" class="form-control" id="street_name" placeholder="Brock St" required>
-            </div>
-
-          </div>
-
-
-          <div class="row">
-
-            <div class="col-md-8 mb-3">
-              <label for="main_actors">Main Actors</label>
-              <input Name=main_actors type="text" class="form-control" id="main_actors" placeholder="Seperate by a comma" required>
-            </div>
-
-
-          <hr class="mb-4">
-            <div class="col-md-8 mb-3">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Movie</button>
-            </div>
-          </div>
-        </form>
-        </div>
-        </div>
           
 
-
-
-
-
-
-
+        
+          </div>
+          
         </main>
 
        <footer class="container">

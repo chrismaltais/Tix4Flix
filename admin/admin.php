@@ -141,7 +141,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Get rating of movie selected in find_movies.php
-    $result = $conn->query("select member.member_id, user_account.fname, user_account.lname from user_account right join member on member.email = user_account.email");
+    $result = $conn->query("select Member.member_id, User_Account.fname, User_Account.lname from User_Account right join Member on Member.email = User_Account.email");
 
           while($row = $result->fetch_assoc()) {
                 echo "<tr>";
