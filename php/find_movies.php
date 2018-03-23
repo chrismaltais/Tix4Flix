@@ -100,7 +100,20 @@
                         </div>
 
 
-	  
+	    <div class="input-group mb-3 pr-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="movie">Movie  </label>
+            </div>
+                <select class="custom-select" id="movie" name="movie_chosen">
+                    <?php
+                        while ($row = $result2->fetch_assoc()) {
+                            unset($id, $name);
+                            $name = $row['title']; 
+                            echo '<option value="'.$name.'">'.$name.'</option>';
+                        }
+                    ?>
+                </select>        
+        </div>
      
         
         
