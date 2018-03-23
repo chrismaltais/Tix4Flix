@@ -5,10 +5,8 @@
     $password = "";
     $dbname = "complexdb";
     $review = $_POST["review"]; 
-    //$member = $_SESSION["user_id"];
-    //$title = $_SESSION["title"];
-    $member = 1;
-    $title = "Harry Potter";
+    $member = $_SESSION["user_id"];
+    $title = $_SESSION["movie"];
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
       
@@ -17,8 +15,12 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Get rating of movie selected in find_movies.php
-    $sql = "insert into opinion (member_id, title, review) values ('$member','$title','$review');";
+    $sql = "insert into Opinion (member_id, title, review) values ('$member','$title','$review');";
     
-    $result = $conn->query($sql);
+    if ($result = $conn->query($sql)) {
+        header('Location: ../php/home.php?sucess');
+    } else {
+        echo "Query unsucessful!";
+    }
 
 ?>

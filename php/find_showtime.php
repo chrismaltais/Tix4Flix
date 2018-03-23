@@ -143,7 +143,7 @@
                 ?>
             </div>
             <div class="col-md-4 mb-6">
-            <p><a class="btn btn-secondary" href="#" role="button">Reviews &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="../php/see_reviews.php?<?php echo $movie;?>" role="button">Reviews &raquo;</a></p>
             </div>
           </div>
           </div>

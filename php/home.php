@@ -121,7 +121,7 @@
                     echo "<p><a class='btn btn-secondary' href='../php/find_movies.php' role='button'>Showtimes &raquo;</a></p>";
                     echo "</div>";
                     echo "<div class='col-md-4 mb-3'>";
-                    echo "<p><a class='btn btn-secondary' href='#' role='button'>Reviews &raquo;</a></p>";
+                    echo "<p><a class='btn btn-secondary' href='../php/see_reviews.php?" . $row['title'] . "' role='button'>Reviews &raquo;</a></p>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";

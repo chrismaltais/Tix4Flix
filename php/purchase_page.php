@@ -49,9 +49,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Settings</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="../pages/edit_info.html">Edit Personal Info</a>
-              <a class="dropdown-item" href="#">My Reservations</a>
-              <a class="dropdown-item" href="#">Reservation History</a>
+              <a class="dropdown-item" href="../php/edit_info.php">Edit Personal Info</a>
+              <a class="dropdown-item" href="../php/prevres.php">My Reservations</a>
+              <a class="dropdown-item" href="../php/newres.php">Reservation History</a>
               <a class="dropdown-item" href="../pages/index.html">Logout</a>
             </div>
           </li>
@@ -87,7 +87,7 @@
             ?>
             </div>
             <div class="col-md-4 mb-6">
-            <p><a class="btn btn-secondary" href="#" role="button">Reviews &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="../php/see_reviews.php?<?php echo $_SESSION['movie_title'];?>" role="button">Reviews &raquo;</a></p>
             </div>
           </div>
           </div>

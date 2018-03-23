@@ -1,10 +1,24 @@
 <?php 
     session_start();
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "complexdb";
     $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     $link_exploded = explode("?", $actual_link);
     $movie = str_replace("%20", " ", $link_exploded[1]);
-    $_SESSION['movie'] = $movie;
+    $sql_review = "SELECT review, fname, lname FROM Opinion JOIN User_Info on Opinion.member_id = User_Info.member_id where title = '$movie'";
+    $sql_names = "CREATE OR REPLACE VIEW User_Info(fname, lname, member_id) AS SELECT fname, lname, member_id FROM User_Account JOIN Member ON User_Account.email = Member.email";
 
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $result_names = $conn->query($sql_names);
+    $result_review = $conn->query($sql_review);
 ?>
 
 <!doctype html>
@@ -16,7 +30,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Leave a Review</title>
+    <title>Reviews</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
@@ -68,7 +82,7 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Leave a Review</h1>
+          <h1 class="display-3">Reviews</h1>
         </div>
       </div>
 
@@ -84,12 +98,19 @@
             ?>
           </div>
           <div class="col-md-8">
-          <h1 class="display-3"><?php echo $movie; ?></h1> 
-          <form class="col-md-15 mb-3" action = "subreview.php" method="POST">
-              <label for="review">Type your review here</label>
-              <textarea Name = review class="form-control" id="review" rows="4" required></textarea>
-              <button type="submit" name="submit" class="btn btn-secondary"  role="button">Leave Review &raquo;</button>
-            </form>
+          <h1 class="display-3"><?php echo $movie; ?></h1>
+          
+            <?php
+                while ($row = $result_review->fetch_assoc()) {
+                    echo "<div class='card'>";
+                    echo "<h5 class='card-header'>User: " . $row['fname'] . $row['lname'] . "</h5>";
+                    echo "<div class='card-body'>" . $row['review'] . "</div>";
+                    echo "</div>";
+                }
+                
+              
+              ?>
+            
 
 
           </div>
