@@ -93,6 +93,8 @@
         while($row = $result->fetch_assoc()) {
             if ($_SESSION['current_date'] > $row['date_played']) {
                 $movie = "";
+                $date = strtotime($row['date_played']);
+                $date = date("M d", $date);
                 echo "<div class='row pb-4'>";
                 echo "<div class='col-md-4'>";    
                 $line1 = "<img class='img-rounded' src='../photos/";
@@ -110,7 +112,7 @@
                 echo "</div>";
                 echo "<div class='col-md-8'>";
                 echo "<h1 class='display-3'> "  . $row["title"] . " </h1>";
-                echo "<h2 class='display-8'> Date, "  . $row["start_time"] ." at ".$row["name"]." </h2>";
+                echo "<h2 class='display-8'>" . $date . ", " . $row["start_time"] ." at ".$row["name"]." </h2>";
                 echo "<h3 class='display-8'> Tickets: ". $row["num_tickets"] ." | Run Time: ". $row["run_time"] ." mins</h3>";
                 echo "<p>" . $row['plot_synopsis']. "</p>";
                 echo "<p><a name = '" . $row["title"] . "' class='btn btn-secondary' href='../php/reviews.php?" . $row["title"] . "' role='button'>Leave a Review &raquo;</a></p>";
