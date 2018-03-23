@@ -9,6 +9,7 @@ $phone_num = $_POST["phone_num"];
 $street_number = $_POST["street_number"]; 
 $street_name = $_POST["street_name"]; 
 $postal_code =  $_POST["postal_code"];
+$contact = $_POST["contact"];
 
 
 // Create connection
@@ -20,8 +21,8 @@ if ($conn->connect_error) {
  
 
 
-$sql = "insert into Supplier (company_name, phone_number, street_name, street_number, postal_code) values
-('$company_name','$phone_num','$street_name','$street_number','$postal_code');";
+$sql = "insert into Supplier (company_name, phone_number, street_name, street_number, postal_code, contact) values
+('$company_name','$phone_num','$street_name','$street_number','$postal_code','$contact');";
 
 
 if ($conn->multi_query($sql) === TRUE) {
