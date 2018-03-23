@@ -15,8 +15,6 @@ $end_date = $_POST["end_date"];
 $main_actors = $_POST["main_actors"];  
 $supplier = $_POST["supplier"]; 
 
- 
-
 
 // Create connection
 $conn = new mysqli($servername, $username, $passworddb, $dbname);
@@ -28,9 +26,21 @@ if ($conn->connect_error) {
 $sqlsupp = "select * from Supplier where company_name = '$supplier' ";
 $result = $conn->query($sqlsupp);
     if (mysqli_num_rows($result)!=0) {
-        $sql = "insert into Movie (title, plot_synopsis, run_time, rating, director, production_company, start_date, end_date, supplier) values ('$title','$synopsis','$run_time','$rating','$director','$production_company','$start_date', '$end_date', '$supplier');";
-        $sql .= "insert into Movie_Actors(title, main_actor) values ('$title', '$main_actors');";
-        $conn->multi_query($sql);
+        $sql = "insert into Movie (title, plot_synopsis, run_time, rating, director, production_company, start_date, end_date, supplier) values ('$title','$synopsis','$run_time','$rating','$director','$production_company', $start_date, $end_date, '$supplier');";
+        echo $sql;
+        $conn->query($sql);
+        
+        $actors_temp = str_replace(", ", "?", $main_actors);
+        $actors_temp2 = str_replace(",", "?", $actors_temp);
+        $actor_array = explode("?", $actors_temp2);
+        $num_actors = count($actor_array);
+
+        for ($i = 0; $i < $num_actors; $i++) {
+            echo "Title in for loop is: " . $title;
+            echo "Name of actor is: " . $actor_array[$i];
+            $sql = "insert into Movie_Actors (title, main_actor) values ('$title', '$actor_array[$i]')";
+            $conn->query($sql);
+        }
         echo "New records created successfully";
         header('Location: ../admin/admin.php'); 
     } else {
