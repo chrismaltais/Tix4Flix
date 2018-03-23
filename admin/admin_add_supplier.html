@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,7 +7,7 @@ session_start();
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin - Movie History</title>
+    <title>Admin - Add Supplier</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min2.css" rel="stylesheet">
@@ -111,162 +108,65 @@ session_start();
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Member Movie History</h1>
-          </div>
-
-          <h4 class="h4"> Account Details </h4>
-          <div class="row">
-               <?php 
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "";
-    $dbname = "complexdb";
-
-
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-      
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $sections_of_URL = explode("?", $actual_link);
-    $result = $conn->query("select Member.member_id, User_Account.fname, User_Account.lname from User_Account right join Member on Member.email = User_Account.email where Member.member_id = '$sections_of_URL[1]'");
-
-          while($row = $result->fetch_assoc()) {
-              
-            echo  "<div class='col-md-1.5 mb-3'>";
-            echo  "<p>Account Number:</p>";
-            echo  "</div>";
-            echo  "<div class='col-md-1 mb-3'>";
-            echo  "<p class='text-left'>". $row["member_id"] ."</p>";
-            echo  "</div>";
-
-            echo "<div class='col-md-1.5'>";
-            echo  "<p>First Name:</p>";
-            echo "</div>";
-            echo "<div class='col-md-1'>";
-            echo  "<p>". $row["fname"] ."</p>";
-            echo "</div>";
-
-            echo "<div class='col-md-1.5'>";
-            echo  "<p>Last Name:</p>";
-            echo "</div>";
-            echo "<div class='col-md-1'>";
-            echo  "<p>". $row["lname"] ."</p>";
-            echo "</div>";
-
-          echo "<p></p>";
-              break;
-       
-}
-?>
-           
-        </div>
-
-
-          <h4 class="h4"> Current Reservations </h4>
-          <div class="table-responsive">
-            <table class="table table-striped table-sm">
-              <thead>
-                  
-                <tr>
-                  <th>Reservation Number</th>
-                  <th>Complex</th>
-                  <th>Movie</th>
-                  <th>Start Time</th>
-                  <th>Number of Tickets</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <?php 
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "";
-    $dbname = "complexdb";
-
-
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-      
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $sections_of_URL = explode("?", $actual_link);
-    $result = $conn->query("select Showing.date_played, Reservations.reservation_id,Showing.name, Movie.title,Showing.start_time,Reservations.num_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num  = ' $sections_of_URL[1] '");
-
-          while($row = $result->fetch_assoc()) {
-               if ($_SESSION['current_date'] < $row['date_played']) {
-                    echo "<tr>";
-                  echo "<td>". $row["reservation_id"] ."</td>";
-                  echo "<td>". $row["name"] ."</td>";
-                  echo "<td>". $row["title"] ."</td>";
-                  echo "<td>". $row["start_time"] ."</td>";
-                  echo "<td>". $row["num_tickets"] ."</td>";
-                echo "</tr>";
-               }
-         
-}
-?>
-
-               
-
-
-              </tbody>
-            </table>
+            <h1 class="h2">Add Supplier</h1>
           </div>
 
 
 
-          <h4 class="h4"> Previous Reservations </h4>
-          <div class="table-responsive">
-            <table class="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th>Reservation Number</th>
-                  <th>Complex</th>
-                  <th>Movie</th>
-                  <th>Start Time</th>
-                  <th>Number of Tickets</th>
-                </tr>
-              </thead>
-              <tbody>
-       <?php 
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "";
-    $dbname = "complexdb";
-
-
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-      
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $sections_of_URL = explode("?", $actual_link);
-    $result = $conn->query("select Showing.date_played, Reservations.reservation_id,Showing.name, Movie.title,Showing.start_time,Reservations.num_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num  = ' $sections_of_URL[1] '");
-
-          while($row = $result->fetch_assoc()) {
-               if ($_SESSION['current_date'] > $row['date_played']) {
-          echo "<tr>";
-                  echo "<td>". $row["reservation_id"] ."</td>";
-                  echo "<td>". $row["name"] ."</td>";
-                  echo "<td>". $row["title"] ."</td>";
-                  echo "<td>". $row["start_time"] ."</td>";
-                  echo "<td>". $row["num_tickets"] ."</td>";
-                echo "</tr>";
-               }
-         
-}
-?>
-
-
-              </tbody>
-            </table>
+          <form class="needs-validation" novalidate method="POST" action="../admin/admin_add_supplier.php">
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="company_name">Company Name</label>
+                <input Name = company_name type="text" class="form-control" id="company_name" placeholder="Company Name" value="" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-md-2 mb-3">
+                <label for="phone_num">Phone Number</label>
+                <input Name = phone_num type="text" class="form-control" id="phone_num" placeholder="Phone Number" value="" required>
+              </div>
+                
+              <div class="col-md-3 mb-3">
+                <label for="contact">Contact Name</label>
+                <input Name = contact type="text" class="form-control" id="contact" placeholder="Contact Name" value="" required>
+              </div>
           </div>
+          
+          <h4 class="mb-3">Address</h4>
+            <div class="row">
+
+            <div class="col-md-2 mb-3">
+              <label for="street_number">Street Number</label>
+              <input Name=street_number type="text" class="form-control" id="street_number" placeholder="340" required>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label for="street_name">Street Name</label>
+              <input Name=street_name type="text" class="form-control" id="street_name" placeholder="Brock St" required>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label for="postal_code">Postal Code</label>
+              <input Name=postal_code type="text" class="form-control" id="postal_code" placeholder="K7L1S8" required>
+            </div>
+            </div>
+
+            <div class="col-md-8 mb-3">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Supplier</button>
+            </div>
+          <hr class="mb-4">
+          </div>
+          </form>
+
+          </div>
+          </div>
+          
+
+
+
+
+
 
 
         </main>
