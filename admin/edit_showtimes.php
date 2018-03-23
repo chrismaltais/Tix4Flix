@@ -76,6 +76,13 @@ session_start();
                   Add a Showtime
                 </a>
               </li>
+                
+              <li class="nav-item">
+                <a class="nav-link" href="../admin/admin_add_supplier.html">
+                  <span data-feather="layers"></span>
+                  Add a Supplier
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="../admin/admin_analytics.php">
