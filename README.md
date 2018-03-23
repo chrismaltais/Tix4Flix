@@ -54,8 +54,7 @@ The project was intended to give me an opportunity to participate in all phases 
 ## Try it yourself
 
 1. Download and install [XAMPP](https://www.apachefriends.org/index.html) (Apache Server)
-2. Locate and enter the `/volumes/root/htdocs` folder within the application (Through `/home/.bitnami` on OSX, and application folder on Windows)
-  * This folder is essentially a **PHP "engine"** which allows PHP files to run on the Apache Server
+2. Locate and enter the `/volumes/root/htdocs` folder within the application (Through `/home/.bitnami` on OSX, and application folder on Windows). This folder is essentially a **PHP "engine"** which allows PHP files to run on the Apache Server
 3. Create a folder and initialize your repository
   * `mkdir longtitleproject && cd $_`
   * `git init`
@@ -63,7 +62,8 @@ The project was intended to give me an opportunity to participate in all phases 
   * `git remote add origin https://github.com/chrismaltais/Tix4Flix.git`
 5. Pull remote files to your local repository to use!
   * `git pull origin master`
-6. Run `pages/index.html`
+6. Open PHPMyAdmin via XAMPP, query the database DDL `complexdb.sql`: It creates and populates tables with dummy data!
+7. Run `pages/index.html`
 
 ### Member Credentials
 **Email:** user@demo.com
