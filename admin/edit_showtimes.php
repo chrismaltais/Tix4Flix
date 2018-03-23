@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,7 +24,7 @@
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Tix4flix Admin</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="../pages/index.html">Sign out</a>
+          <a class="nav-link" href="#">Sign out</a>
         </li>
       </ul>
     </nav>
@@ -33,14 +36,14 @@
             <ul class="nav flex-column">
 
               <li class="nav-item">
-                <a class="nav-link active" href="../admin/admin.php">
+                <a class="nav-link active" href="../pages/admin.html">
                   <span data-feather="home"></span>
                   Admin Dashboard <span class="sr-only">(current)</span>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../admin/admin.php">
+                <a class="nav-link" href="../pages/admin.html">
                   <span data-feather="users"></span>
                   Manage Customers
                 </a>
@@ -89,14 +92,14 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_edit_theatre.html">
+                <a class="nav-link" href="../pages/admin_analytics.html">
                   <span data-feather="bar-chart-2"></span>
                   Edit Theatre
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../admin/edit_showtimes.php">
+                <a class="nav-link" href="../pages/admin_analytics.html">
                   <span data-feather="bar-chart-2"></span>
                   Edit Showing
                 </a>
@@ -108,24 +111,22 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Admin Dashboard</h1>
-          
+            <h1 class="h2">Update Showtimes</h1>
           </div>
+
 
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
-                  <th>Account Number</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Remove Member</th>
-                  <th>Member Movie History</th>
+                  <th>Showing ID</th>
+                  <th>Movie Complex</th>
+                  <th>Movie Showtime</th>
+                  <th>Submit Changes</th>
                 </tr>
               </thead>
               <tbody>
-                  
- <?php 
+                  <?php 
     $servername = "127.0.0.1";
     $username = "root";
     $password = "";
@@ -141,22 +142,33 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Get rating of movie selected in find_movies.php
-    $result = $conn->query("select Member.member_id, User_Account.fname, User_Account.lname from User_Account right join Member on Member.email = User_Account.email");
-
-          while($row = $result->fetch_assoc()) {
+    $result = $conn->query("select showing_id, name, start_time, date_played from showing");
+                  $counter = 0;
+        while($row = $result->fetch_assoc()) {
+if ($_SESSION['current_date'] > $row['date_played']) {  
+                echo "<form method='POST' action=../admin/update_showtime.php?". $row["showing_id"] ."?".$row["name"] ."?". $row["start_time"] ."'";
                 echo "<tr>";
-                echo  "<td>". $row["member_id"] ."</td>";
-                echo  "<td>". $row["fname"] ."</td>";
-                echo  "<td>". $row["lname"] ."</td>";
-                echo  "<td><a class='btn btn-link ' href='../admin/remove.php?" . $row["member_id"] . "' role='button'>Remove &raquo;</a></td>";
-                echo  "<td><a class='btn btn-link ' href='../admin/admin_movie_history.php?" . $row["member_id"] . "' role='button'>Movie History &raquo</a>";
-                echo "</td>";
+                  echo "<td>". $row["showing_id"] ."</td>";
+                  echo "<td><input Name= 'complex".$row["showing_id"]."' type='text' class='form-control' id='complex".$row["showing_id"]."' placeholder='Movie Complex' value='".$row["name"] ."' ></td>";
+                  echo "<td><input Name='start_time".$row["showing_id"]."' type='text' class='form-control' id='start_time".$row["showing_id"]."' placeholder='Showtime' value='". $row["start_time"] ."'></td>";
+                  echo "<td><button type='submit' class='btn btn-link' role='button'>Update &raquo;</button></td>";
                 echo "</tr>";
-          }
-        ?>
-  </tbody>
+                echo "</form>";
+    
+                $counter++;
+    
+                      
+}
+        }
+                  ?>
+
+
+              </tbody>
             </table>
           </div>
+
+
+
         </main>
 
        <footer class="container">
@@ -215,6 +227,3 @@
     </script>
   </body>
 </html>
-
- 
-
