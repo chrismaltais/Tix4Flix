@@ -142,7 +142,7 @@ session_start();
         die("Connection failed: " . $conn->connect_error);
     }
     // Get rating of movie selected in find_movies.php
-    $result = $conn->query("select showing_id, name, start_time, date_played from showing");
+    $result = $conn->query("select showing_id, name, start_time, date_played from Showing");
                   $counter = 0;
         while($row = $result->fetch_assoc()) {
 if ($_SESSION['current_date'] > $row['date_played']) {  

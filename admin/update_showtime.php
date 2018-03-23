@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 
 
 
-$sql = "UPDATE showing SET name = '$complex', start_time = '$start_time' WHERE showing_id = '$sections_of_URL[1]'";
+$sql = "UPDATE Showing SET name = '$complex', start_time = '$start_time' WHERE showing_id = '$sections_of_URL[1]'";
 
 echo $sql;
 //$sql .= "DELETE FROM Member WHERE member_id = '$sections_of_URL[1]'  and email = '$email';";
@@ -37,7 +37,7 @@ echo $sql;
 
 if ($conn->multi_query($sql) === TRUE) {
     echo "Record deleted successfully";
-    //header('Location: ../admin/edit_showtimes.php'); 
+    header('Location: ../admin/edit_showtimes.php'); 
 } else {
     echo "Error deleting record: " . $conn->error;
 }

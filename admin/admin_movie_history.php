@@ -36,70 +36,70 @@ session_start();
             <ul class="nav flex-column">
 
               <li class="nav-item">
-                <a class="nav-link active" href="../pages/admin.html">
+                <a class="nav-link active" href="../admin/admin.php">
                   <span data-feather="home"></span>
                   Admin Dashboard <span class="sr-only">(current)</span>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin.html">
+                <a class="nav-link" href="../admin/admin.php">
                   <span data-feather="users"></span>
                   Manage Customers
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_add_movie.html">
+                <a class="nav-link" href="../admin/admin_add_movie.html">
                   <span data-feather="layers"></span>
                   Add a Movie
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_add_complex.html">
+                <a class="nav-link" href="../admin/admin_add_complex.html">
                   <span data-feather="layers"></span>
                   Add a Complex
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_add_theatre.html">
+                <a class="nav-link" href="../admin/admin_add_theatre_html.php">
                   <span data-feather="layers"></span>
                   Add a Theatre
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_add_showtime.html">
+                <a class="nav-link" href="../admin/admin_add_showtime_html.php">
                   <span data-feather="layers"></span>
                   Add a Showtime
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_analytics.html">
+                <a class="nav-link" href="../admin/admin_analytics.php">
                   <span data-feather="bar-chart-2"></span>
                   Business Analytics
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_edit_complex.html">
+                <a class="nav-link" href="../admin/admin_edit_complex_html.php">
                   <span data-feather="bar-chart-2"></span>
                   Edit Complex
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_edit_theatre.html">
+                <a class="nav-link" href="../admin/admin_edit_theatre_html.php">
                   <span data-feather="bar-chart-2"></span>
                   Edit Theatre
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../pages/admin_edit_showtimes.html">
+                <a class="nav-link" href="../admin/edit_showtimes.php">
                   <span data-feather="bar-chart-2"></span>
                   Edit Showing
                 </a>
@@ -122,7 +122,7 @@ session_start();
     $password = "";
     $dbname = "complexdb";
 
-
+`
 
     $conn = new mysqli($servername, $username, $password, $dbname);
       
@@ -130,8 +130,8 @@ session_start();
         die("Connection failed: " . $conn->connect_error);
     }
     $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $actual_link_adj = str_replace("http://localhost/github/admin/admin_movie_history.php?", "", $actual_link);
-    $result = $conn->query("select Member.member_id, User_Account.fname, User_Account.lname from User_Account right join Member on Member.email = User_Account.email where Member.member_id = ' $actual_link_adj '");
+    $sections_of_URL = explode("?", $actual_link);
+    $result = $conn->query("select Member.member_id, User_Account.fname, User_Account.lname from User_Account right join Member on Member.email = User_Account.email where Member.member_id = ' $sections_of_URL[1] '");
 
           while($row = $result->fetch_assoc()) {
 
@@ -193,8 +193,8 @@ session_start();
         die("Connection failed: " . $conn->connect_error);
     }
     $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $actual_link_adj = str_replace("http://localhost/github/admin/admin_movie_history.php?", "", $actual_link);
-    $result = $conn->query("select Showing.date_played, Reservations.reservation_id,Showing.name, Movie.title,Showing.start_time,Reservations.num_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num  = ' $actual_link_adj '");
+    $sections_of_URL = explode("?", $actual_link);
+    $result = $conn->query("select Showing.date_played, Reservations.reservation_id,Showing.name, Movie.title,Showing.start_time,Reservations.num_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num  = ' $sections_of_URL[1] '");
 
           while($row = $result->fetch_assoc()) {
                if ($_SESSION['current_date'] < $row['date_played']) {
@@ -246,8 +246,8 @@ session_start();
         die("Connection failed: " . $conn->connect_error);
     }
     $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $actual_link_adj = str_replace("http://localhost/github/admin/admin_movie_history.php?", "", $actual_link);
-    $result = $conn->query("select Showing.date_played, Reservations.reservation_id,Showing.name, Movie.title,Showing.start_time,Reservations.num_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num  = ' $actual_link_adj '");
+    $sections_of_URL = explode("?", $actual_link);
+    $result = $conn->query("select Showing.date_played, Reservations.reservation_id,Showing.name, Movie.title,Showing.start_time,Reservations.num_tickets from Reservations left join Showing on Showing.showing_id = Reservations.showing_id left join Movie on Movie.title = Showing.title where Reservations.account_num  = ' $sections_of_URL[1] '");
 
           while($row = $result->fetch_assoc()) {
                if ($_SESSION['current_date'] > $row['date_played']) {
