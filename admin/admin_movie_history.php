@@ -122,7 +122,7 @@ session_start();
     $password = "";
     $dbname = "complexdb";
 
-`
+
 
     $conn = new mysqli($servername, $username, $password, $dbname);
       

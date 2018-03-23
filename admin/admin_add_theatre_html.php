@@ -160,14 +160,14 @@
 
             <div class="col-md-4 mb-3">
               <label for="screen_size">Screen Size</label>
-              <input Name=screen_size type="text" class="form-control" id="screen_size" placeholder="Brock St" required>
+              <input Name=screen_size type="text" class="form-control" id="screen_size" placeholder="Large" required>
             </div>
 
             </div>
 
 
             <div class="col-md-8 mb-3">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Complex</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Add Theatre</button>
             </div>
           <hr class="mb-4">
           </div>
