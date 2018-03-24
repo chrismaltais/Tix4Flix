@@ -153,9 +153,14 @@
 
     </main>
 
-    <footer class="container">
-      <p>&copy; Tix4flix 2017-2018</p>
-    </footer>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2018 Tix4Flix</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

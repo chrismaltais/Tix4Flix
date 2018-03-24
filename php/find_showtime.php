@@ -95,8 +95,8 @@
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Settings</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="../php/edit_info.php">Edit Personal Info</a>
-              <a class="dropdown-item" href="#">My Reservations</a>
-              <a class="dropdown-item" href="#">Reservation History</a>
+              <a class="dropdown-item" href="../newres.php">My Reservations</a>
+              <a class="dropdown-item" href="../prevres.php">Reservation History</a>
               <a class="dropdown-item" href="../pages/index.html">Logout</a>
             </div>
           </li>
@@ -174,11 +174,14 @@
 
     </main>
 
-    <footer class="container">
-      <div class="d-flex justify-content-center">
-      <p>&copy; Tix4flix 2017-2018</p>
-    </div>
-    </footer>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2018 Tix4Flix</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

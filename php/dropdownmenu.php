@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 } 
  
 
-   $result = $conn->query("select title, rating from Movie");
+    $result = $conn->query("select title, rating from Movie");
     
     echo "<html>";
     echo "<body>";
