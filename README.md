@@ -75,4 +75,7 @@ The project was intended to give me an opportunity to participate in all phases 
 
 **Password:** password
 
+## Feature Backlog
 
+- [ ] Add security (password hashing, etc.)
+- [ ] Re-factor code (codebase is definitely not DRY - functions can be created)
