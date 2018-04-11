@@ -49,7 +49,15 @@ The project was intended to give me an opportunity to participate in all phases 
 ![alt](https://i.imgur.com/bcOuxXj.png "Entity Relationship Diagram")
 
 ## Implementation
-- [ ] Screenshots to be added
+Click [here](https://www.scribd.com/document/376067934/Post-Development-Report "Post-Development Report") for Post-Development Report which includes:
+1) Entity Relation Diagram 
+2) Assumptions 
+3) Cardinality Legend for ER Diagram 
+4) Problems Encountered During Development 
+5) Design and Implementation Decisions 
+6) Technologies and Tools Used 
+7) Features to be Added 
+8) User Manual
 
 ## Try it yourself
 
