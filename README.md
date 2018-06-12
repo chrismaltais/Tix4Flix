@@ -1,7 +1,7 @@
 # Tix4Flix: Online Movie Ticketing Service
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 ## Background
-This project was built to develop a database that can be used to support an Online Movie Ticket Service (OMTS), which is an application for the advance purchase of movie tickets from any local theatre. Customers use the service to find out information about movies currently playing in various complexes and to order advance tickets for specific showings of the movies. 
+This project was built to develop a relational database that can be used to support an Online Movie Ticket Service (OMTS), which is an application for the advance purchase of movie tickets from any local theatre. Customers use the service to find out information about movies currently playing in various complexes and to order advance tickets for specific showings of the movies. 
 
 The project was intended to give me an opportunity to participate in all phases of the development of a database application including:
 1. ER modeling techniques
